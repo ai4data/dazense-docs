@@ -1,765 +1,173 @@
-:root {
-	--mz-black: #000000;
-	--mz-white: #ffffff;
-	--mz-primary-purple: #8142ff;
-	--mz-purple-dark: #aa80ff;
-	--mz-text-strong: #ffffff;
-	--mz-text: #e8e4f0;
-	--mz-text-muted: #c8c4d8;
-	--mz-text-dim: #a8a4b8;
-	--mz-link: #d4c4ff;
-	--mz-link-hover: #ffffff;
-	--mz-border: rgba(255, 255, 255, 0.12);
-	--mz-code-bg: rgba(255, 255, 255, 0.08);
-}
-
-html,
-body {
-	background-color: var(--mz-black);
-	color: var(--mz-text);
-}
-
-body {
-	background-image: radial-gradient(circle at 20% 50%, rgba(129, 66, 255, 0.15), transparent 50%),
-		radial-gradient(circle at 80% 30%, rgba(170, 128, 255, 0.1), transparent 40%);
-	background-attachment: fixed;
-}
-
-#navbar {
-	background: rgba(0, 0, 0, 0.8);
-	backdrop-filter: blur(10px);
-	border-bottom: 1px solid var(--mz-border);
-	color: var(--mz-text-strong);
-}
-
-#sidebar {
-	background: #0a0a0a;
-	border-right: 1px solid var(--mz-border);
-	color: var(--mz-text);
-}
-
-#content-area h1,
-#content-area h2,
-#content-area h3,
-#content-area h4,
-#content-area h5,
-#content-area h6 {
-	font-family: 'Urbanist', sans-serif;
-	color: var(--mz-text-strong);
-}
-
-#content-area p,
-#content-area li,
-#content-area td,
-#content-area th {
-	color: var(--mz-text);
-}
-
-/* Numbered lists and ordered list markers - critical for visibility */
-#content-area ol {
-	color: var(--mz-text);
-}
-
-#content-area ol li::marker {
-	color: var(--mz-text-muted);
-}
-
-#content-area span,
-#content-area div,
-#content-area figcaption,
-#content-area blockquote,
-#content-area small,
-#content-area label,
-#content-area button {
-	color: var(--mz-text);
-}
-
-/* Placeholder text - ensure high visibility */
-#content-area input::placeholder,
-#content-area textarea::placeholder {
-	color: var(--mz-text-dim) !important;
-	opacity: 1 !important;
-}
-
-#content-area input::-webkit-input-placeholder,
-#content-area textarea::-webkit-input-placeholder {
-	color: var(--mz-text-dim) !important;
-	opacity: 1 !important;
-}
-
-#content-area input::-moz-placeholder,
-#content-area textarea::-moz-placeholder {
-	color: var(--mz-text-dim) !important;
-	opacity: 1 !important;
-}
-
-#content-area input:-ms-input-placeholder,
-#content-area textarea:-ms-input-placeholder {
-	color: var(--mz-text-dim) !important;
-	opacity: 1 !important;
-}
-
-#content-area a {
-	color: var(--mz-link);
-	text-decoration: underline;
-	text-underline-offset: 2px;
-}
-
-#content-area a:hover {
-	color: var(--mz-link-hover);
-}
-
-#content-area code,
-#content-area pre {
-	background: var(--mz-code-bg);
-	border: 1px solid var(--mz-border);
-	color: var(--mz-text-strong);
-}
-
-#content-area code {
-	padding: 0.15em 0.4em;
-	border-radius: 6px;
-	font-size: 0.9em;
-}
-
-#content-area pre code {
-	background: transparent;
-	border: none;
-	padding: 0;
-}
-
-#content-area pre {
-	padding: 1rem;
-	border-radius: 8px;
-	overflow-x: auto;
-}
-
-#content-area kbd {
-	color: var(--mz-text-strong);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	background: rgba(255, 255, 255, 0.12);
-	padding: 0.2em 0.5em;
-	border-radius: 4px;
-	font-size: 0.85em;
-}
-
-#sidebar a,
-#sidebar span,
-#sidebar div,
-#sidebar p,
-#sidebar li,
-#sidebar h2,
-#sidebar h3,
-#sidebar button {
-	color: var(--mz-text) !important;
-}
-
-#sidebar a:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-#sidebar .active,
-#sidebar .active a,
-#sidebar .active span {
-	color: var(--mz-white) !important;
-	background: rgba(129, 66, 255, 0.2) !important;
-}
-
-#table-of-contents,
-#table-of-contents a,
-#table-of-contents span,
-#table-of-contents li,
-#table-of-contents p {
-	color: var(--mz-text-muted) !important;
-}
-
-#table-of-contents a:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Override Tailwind-style muted text colors with high-contrast values */
-.dark .text-gray-400,
-.dark .text-gray-500,
-.dark .text-gray-600,
-.dark .text-gray-700,
-.dark .text-slate-400,
-.dark .text-slate-500,
-.dark .text-slate-600,
-.dark .text-slate-700,
-.dark .text-zinc-400,
-.dark .text-zinc-500,
-.dark .text-zinc-600,
-.dark .text-zinc-700,
-.dark .text-neutral-500,
-.dark .text-neutral-600,
-.dark .text-neutral-700 {
-	color: var(--mz-text-muted) !important;
-}
-
-/* Content area specific overrides - ensure all muted text is readable */
-.dark #content-area .text-gray-400,
-.dark #content-area .text-gray-500,
-.dark #content-area .text-gray-600,
-.dark #content-area .text-gray-700,
-.dark #content-area .text-slate-400,
-.dark #content-area .text-slate-500,
-.dark #content-area .text-slate-600,
-.dark #content-area .text-slate-700,
-.dark #content-area .text-zinc-400,
-.dark #content-area .text-zinc-500,
-.dark #content-area .text-zinc-600,
-.dark #content-area .text-zinc-700,
-.dark #content-area .text-neutral-500,
-.dark #content-area .text-neutral-600,
-.dark #content-area .text-neutral-700 {
-	color: var(--mz-text) !important;
-}
-
-/* Tab panels and interactive elements */
-#content-area [role="tab"],
-#content-area [role="tablist"] button,
-#content-area .tab,
-#content-area .tabs button {
-	color: var(--mz-text) !important;
-}
-
-#content-area [role="tab"][aria-selected="true"],
-#content-area [role="tablist"] button[aria-selected="true"],
-#content-area .tab[aria-selected="true"],
-#content-area .tabs button[aria-selected="true"] {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Step indicators and numbered items - critical fix for visibility */
-#content-area .step,
-#content-area .step-number,
-#content-area [data-step] {
-	color: var(--mz-text) !important;
-}
-
-/* Blockquotes and callouts */
-#content-area blockquote {
-	border-left: 3px solid var(--mz-primary-purple);
-	padding-left: 1rem;
-	color: var(--mz-text);
-}
-
-/* Tables */
-#content-area table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-#content-area table th,
-#content-area table td {
-	border: 1px solid var(--mz-border);
-	padding: 0.75rem;
-	color: var(--mz-text);
-}
-
-#content-area table thead th {
-	background: rgba(255, 255, 255, 0.05);
-	color: var(--mz-text-strong);
-	font-weight: 600;
-}
-
-/* Images and figures */
-#content-area figure {
-	margin: 1.5rem 0;
-}
-
-#content-area figcaption {
-	color: var(--mz-text-muted);
-	font-size: 0.875rem;
-	margin-top: 0.5rem;
-}
-
-/* Horizontal rules */
-#content-area hr {
-	border: none;
-	border-top: 1px solid var(--mz-border);
-	margin: 2rem 0;
-}
-
-/* =============================================
-   MINTLIFY-SPECIFIC OVERRIDES
-   Critical fixes for Mintlify's Tailwind-based styling
-   ============================================= */
-
-/* Root-level dark mode text - override Mintlify's default gray-400 */
-.dark {
-	--tw-prose-body: var(--mz-text) !important;
-	--tw-prose-headings: var(--mz-text-strong) !important;
-	--tw-prose-lead: var(--mz-text) !important;
-	--tw-prose-links: var(--mz-link) !important;
-	--tw-prose-bold: var(--mz-text-strong) !important;
-	--tw-prose-counters: var(--mz-text-muted) !important;
-	--tw-prose-bullets: var(--mz-text-muted) !important;
-	--tw-prose-hr: var(--mz-border) !important;
-	--tw-prose-quotes: var(--mz-text) !important;
-	--tw-prose-quote-borders: var(--mz-border) !important;
-	--tw-prose-captions: var(--mz-text-muted) !important;
-	--tw-prose-code: var(--mz-text-strong) !important;
-	--tw-prose-pre-code: var(--mz-text-strong) !important;
-	--tw-prose-pre-bg: rgba(255, 255, 255, 0.08) !important;
-	--tw-prose-th-borders: var(--mz-border) !important;
-	--tw-prose-td-borders: var(--mz-border) !important;
-}
-
-/* Override Tailwind text colors in dark mode */
-.dark .text-gray-500,
-.dark .text-gray-600,
-.dark .text-gray-700,
-.dark .text-gray-800 {
-	color: var(--mz-text) !important;
-}
-
-.dark .text-gray-400 {
-	color: var(--mz-text-muted) !important;
-}
-
-.dark .text-gray-300,
-.dark .text-gray-200,
-.dark .text-gray-100 {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Mintlify prose content - ensure all text is visible */
-.dark .prose,
-.dark .prose p,
-.dark .prose li,
-.dark .prose td,
-.dark .prose th,
-.dark .prose span:not(.token):not([class*="color-"]) {
-	color: var(--mz-text) !important;
-}
-
-/* Mintlify headings - make them bright white */
-.dark .prose h1,
-.dark .prose h2,
-.dark .prose h3,
-.dark .prose h4,
-.dark .prose h5,
-.dark .prose h6 {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Step headers and bold text - critical for visibility */
-.dark .prose strong,
-.dark .prose b,
-.dark .prose font-semibold,
-.dark [class*="font-semibold"] {
-	color: var(--mz-text-strong) !important;
-	font-weight: 600 !important;
-}
-
-/* Ordered list markers */
-.dark .prose ol {
-	color: var(--mz-text) !important;
-}
-
-.dark .prose ol > li::marker,
-.dark ol li::marker {
-	color: var(--mz-text-muted) !important;
-}
-
-/* Unordered list bullets */
-.dark .prose ul > li::marker,
-.dark ul li::marker {
-	color: var(--mz-text-muted) !important;
-}
-
-/* Inline code - make it stand out */
-.dark .prose code,
-.dark .prose-inline code {
-	color: var(--mz-text-strong) !important;
-	background: rgba(255, 255, 255, 0.1) !important;
-	padding: 0.2em 0.4em !important;
-	border-radius: 4px !important;
-}
-
-/* Code blocks */
-.dark .prose pre,
-.dark pre[class*="language-"] {
-	background: rgba(255, 255, 255, 0.08) !important;
-	border: 1px solid var(--mz-border) !important;
-}
-
-.dark .prose pre code {
-	background: transparent !important;
-	color: var(--mz-text-strong) !important;
-}
-
-/* Mintlify callouts (Note, Warning, Info, etc.) */
-.dark .callout,
-.dark [data-callout-type] {
-	color: var(--mz-text) !important;
-}
-
-.dark .callout-content,
-.dark [data-component-part="callout-content"] {
-	color: var(--mz-text) !important;
-}
-
-/* Provider names and key terms in lists */
-.dark .prose li strong,
-.dark .prose ul li strong {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Links in dark mode */
-.dark .prose a,
-.dark .link {
-	color: var(--mz-link) !important;
-	text-decoration: underline !important;
-	text-underline-offset: 2px !important;
-}
-
-.dark .prose a:hover,
-.dark .link:hover {
-	color: var(--mz-link-hover) !important;
-}
-
-/* Sidebar in dark mode - ensure all items are visible */
-.dark #sidebar,
-.dark #sidebar a,
-.dark #sidebar span,
-.dark #sidebar div,
-.dark #sidebar button,
-.dark #sidebar h2,
-.dark #sidebar h3,
-.dark #sidebar h4,
-.dark #sidebar h5,
-.dark #sidebar li,
-.dark #sidebar p,
-.dark .sidebar-group-header,
-.dark .sidebar-group-header h5 {
-	color: var(--mz-text) !important;
-}
-
-.dark #sidebar a:hover,
-.dark #sidebar button:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Active sidebar item */
-.dark #sidebar .active,
-.dark #sidebar .active a,
-.dark #sidebar .active span,
-.dark #sidebar [class*="bg-primary"] {
-	color: var(--mz-white) !important;
-}
-
-/* Table of contents */
-.dark #table-of-contents,
-.dark #table-of-contents a,
-.dark #table-of-contents span,
-.dark #table-of-contents button {
-	color: var(--mz-text-muted) !important;
-}
-
-.dark #table-of-contents a:hover,
-.dark #table-of-contents button:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Navbar */
-.dark #navbar,
-.dark #navbar a,
-.dark #navbar span,
-.dark .navbar-link a {
-	color: var(--mz-text) !important;
-}
-
-.dark #navbar a:hover,
-.dark .navbar-link a:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Search bar placeholder */
-.dark input::placeholder,
-.dark textarea::placeholder,
-.dark [placeholder] {
-	color: var(--mz-text-dim) !important;
-	opacity: 1 !important;
-}
-
-/* Tab panels */
-.dark [role="tab"],
-.dark [role="tablist"] button,
-.dark .tab,
-.dark .tabs button,
-.dark [class*="tab-"] button {
-	color: var(--mz-text) !important;
-}
-
-.dark [role="tab"][aria-selected="true"],
-.dark [role="tablist"] button[aria-selected="true"],
-.dark .tab[aria-selected="true"],
-.dark .tabs button[aria-selected="true"] {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Mintlify-specific components */
-.dark .eyebrow {
-	color: var(--mz-primary-purple) !important;
-}
-
-.dark .page-title,
-.dark #page-title {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Pagination links */
-.dark #pagination,
-.dark #pagination a,
-.dark #pagination span {
-	color: var(--mz-text) !important;
-}
-
-.dark #pagination a:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-/* Footer */
-.dark footer,
-.dark footer a,
-.dark footer span {
-	color: var(--mz-text-muted) !important;
-}
-
-.dark footer a:hover {
-	color: var(--mz-text) !important;
-}
-
-/* Syntax highlighting tokens - ensure visibility */
-.dark .token.comment,
-.dark .token.prolog,
-.dark .token.doctype,
-.dark .token.cdata {
-	color: #9ca3af !important;
-}
-
-.dark .token.punctuation {
-	color: #e5e7eb !important;
-}
-
-.dark .token.property,
-.dark .token.tag,
-.dark .token.boolean,
-.dark .token.number,
-.dark .token.constant,
-.dark .token.symbol {
-	color: #fca5a5 !important;
-}
-
-.dark .token.selector,
-.dark .token.attr-name,
-.dark .token.string,
-.dark .token.char,
-.dark .token.builtin {
-	color: #86efac !important;
-}
-
-.dark .token.operator,
-.dark .token.entity,
-.dark .token.url,
-.dark .language-css .token.string,
-.dark .style .token.string {
-	color: #e5e7eb !important;
-}
-
-.dark .token.atrule,
-.dark .token.attr-value,
-.dark .token.keyword {
-	color: #f9a8d4 !important;
-}
-
-.dark .token.function,
-.dark .token.class-name {
-	color: #a78bfa !important;
-}
-
-.dark .token.regex,
-.dark .token.important,
-.dark .token.variable {
-	color: #fcd34d !important;
-}
-
-/* =============================================
-   CRITICAL FIXES - Override ALL gray text
-   These rules use maximum specificity to ensure visibility
-   ============================================= */
-
-/* Force all body text to be visible - highest specificity */
-html.dark body,
-html.dark .prose,
-html.dark .mdx-content,
-html.dark #content {
-	color: #E8E4F0 !important;
-}
-
-/* Override every possible gray class combination */
-.dark .dark\:text-gray-300,
-.dark .dark\:text-gray-400,
-.dark .dark\:text-gray-500,
-.dark .dark\:text-gray-600,
-.dark .dark\:text-slate-300,
-.dark .dark\:text-slate-400,
-.dark .dark\:text-slate-500,
-.dark .dark\:text-zinc-300,
-.dark .dark\:text-zinc-400,
-.dark .dark\:text-zinc-500 {
-	color: #E8E4F0 !important;
-}
-
-/* Headings - force white */
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
-.dark .dark\:text-gray-200,
-.dark .dark\:text-gray-100,
-.dark .dark\:text-white {
-	color: #FFFFFF !important;
-}
-
-/* Strong/bold text - critical for step headers and key terms */
-.dark strong,
-.dark b,
-.dark .font-semibold,
-.dark .font-bold,
-.dark [class*="font-semibold"],
-.dark [class*="font-bold"] {
-	color: #FFFFFF !important;
-}
-
-/* Provider names and key terms in lists */
-.dark li strong,
-.dark ul li strong,
-.dark ol li strong,
-.dark .prose li strong {
-	color: #FFFFFF !important;
-}
-
-/* Step headers specifically - "Step 1:", "Step 2:", etc. */
-.dark p strong,
-.dark span strong {
-	color: #FFFFFF !important;
-}
-
-/* Inline code blocks */
-.dark code,
-.dark .prose code,
-.dark :not(pre) > code {
-	color: #FFFFFF !important;
-	background: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Code blocks */
-.dark pre,
-.dark .prose pre {
-	background: rgba(255, 255, 255, 0.08) !important;
-	border: 1px solid rgba(255, 255, 255, 0.12) !important;
-}
-
-.dark pre code {
-	color: #FFFFFF !important;
-	background: transparent !important;
-}
-
-/* Links with underline for visibility */
-.dark a,
-.dark .link,
-.dark .prose a {
-	color: #D4C4FF !important;
-	text-decoration: underline !important;
-}
-
-.dark a:hover,
-.dark .link:hover {
-	color: #FFFFFF !important;
-}
-
-/* List markers */
-.dark ol li::marker,
-.dark ul li::marker {
-	color: #C8C4D8 !important;
-}
-
-/* Callouts */
-.dark .callout,
-.dark .callout-content {
-	color: #E8E4F0 !important;
-}
-
-/* Sidebar - all text visible */
-.dark #sidebar,
-.dark #sidebar *,
-.dark [class*="sidebar"] {
-	color: #D8D4E4 !important;
-}
-
-.dark #sidebar a:hover,
-.dark #sidebar button:hover {
-	color: #FFFFFF !important;
-}
-
-/* Table of contents */
-.dark #table-of-contents,
-.dark #table-of-contents *,
-.dark [class*="toc"] {
-	color: #C8C4D8 !important;
-}
-
-.dark #table-of-contents a:hover {
-	color: #FFFFFF !important;
-}
-
-/* Eyebrow label (e.g., "Chat" above title) */
-.dark .eyebrow {
-	color: #A78BFA !important;
-}
-
-/* Page title */
-.dark #page-title,
-.dark .page-title {
-	color: #FFFFFF !important;
-}
-
-/* Navbar */
-.dark #navbar,
-.dark #navbar * {
-	color: #E8E4F0 !important;
-}
-
-/* Footer */
-.dark footer,
-.dark footer * {
-	color: #B8B4C8 !important;
-}
-
-/* Pagination */
-.dark #pagination,
-.dark #pagination * {
-	color: #E8E4F0 !important;
-}
-
-/* Tabs */
-.dark [role="tab"],
-.dark [role="tablist"] button {
-	color: #D8D4E4 !important;
-}
-
-.dark [role="tab"][aria-selected="true"] {
-	color: #FFFFFF !important;
-}
-
-/* Placeholders */
-.dark ::placeholder {
-	color: #A8A4B8 !important;
-	opacity: 1 !important;
-}
-
-/* Any remaining spans that might be gray */
-.dark span[class*="text-"],
-.dark div[class*="text-"] {
-	color: inherit !important;
-}
+/*
+ * dazense docs - Dark mode text visibility (CSS fallback)
+ *
+ * Primary fix is in fix-dark-mode.js which injects styles AFTER
+ * Mintlify's CSS loads. This file serves as a fallback for the
+ * initial render before JavaScript executes.
+ *
+ * Color palette:
+ *   Headings / bold:   #FFFFFF
+ *   Body text:         #E8E4F0
+ *   Muted text:        #C8C4D8
+ *   Dim text:          #A8A4B8
+ *   Links:             #D4C4FF
+ *   Primary accent:    #8142FF / #A78BFA
+ *   Borders:           rgba(255, 255, 255, 0.12)
+ *   Code background:   rgba(255, 255, 255, 0.06-0.1)
+ */
+
+/* === Tailwind prose custom properties === */
+html.dark .prose {
+  --tw-prose-body: #E8E4F0 !important;
+  --tw-prose-headings: #FFFFFF !important;
+  --tw-prose-bold: #FFFFFF !important;
+  --tw-prose-links: #D4C4FF !important;
+  --tw-prose-counters: #C8C4D8 !important;
+  --tw-prose-bullets: #C8C4D8 !important;
+  --tw-prose-code: #FFFFFF !important;
+  --tw-prose-pre-code: #FFFFFF !important;
+  --tw-prose-pre-bg: rgba(255, 255, 255, 0.06) !important;
+  --tw-prose-quotes: #E8E4F0 !important;
+  --tw-prose-captions: #C8C4D8 !important;
+  --tw-prose-hr: rgba(255, 255, 255, 0.12) !important;
+  --tw-prose-th-borders: rgba(255, 255, 255, 0.12) !important;
+  --tw-prose-td-borders: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* === Core text === */
+html.dark body { color: #E8E4F0 !important; }
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 { color: #FFFFFF !important; }
+
+html.dark p,
+html.dark li,
+html.dark td,
+html.dark th,
+html.dark blockquote,
+html.dark figcaption,
+html.dark label { color: #E8E4F0 !important; }
+
+html.dark strong,
+html.dark b { color: #FFFFFF !important; }
+
+html.dark .font-semibold,
+html.dark .font-bold,
+html.dark [class*="font-semibold"],
+html.dark [class*="font-bold"] { color: #FFFFFF !important; }
+
+/* === Links === */
+html.dark .prose a {
+  color: #D4C4FF !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+html.dark .prose a:hover { color: #FFFFFF !important; }
+
+/* === Code === */
+html.dark :not(pre) > code {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  padding: 0.15em 0.4em !important;
+  border-radius: 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark pre {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* === List markers === */
+html.dark li::marker { color: #C8C4D8 !important; }
+
+/* === Tailwind gray overrides === */
+html.dark .text-gray-400,
+html.dark .text-gray-500,
+html.dark .text-gray-600,
+html.dark .text-gray-700,
+html.dark .text-slate-400,
+html.dark .text-slate-500,
+html.dark .text-slate-600,
+html.dark .text-zinc-400,
+html.dark .text-zinc-500,
+html.dark .text-zinc-600,
+html.dark .text-neutral-400,
+html.dark .text-neutral-500,
+html.dark .text-neutral-600 { color: #E8E4F0 !important; }
+
+html.dark .text-gray-100,
+html.dark .text-gray-200,
+html.dark .text-gray-300,
+html.dark .text-slate-100,
+html.dark .text-slate-200,
+html.dark .text-slate-300,
+html.dark .text-zinc-100,
+html.dark .text-zinc-200,
+html.dark .text-zinc-300 { color: #FFFFFF !important; }
+
+/* === Tailwind dark: variant escaped classes === */
+html.dark .dark\:text-gray-300,
+html.dark .dark\:text-gray-400,
+html.dark .dark\:text-gray-500,
+html.dark .dark\:text-gray-600,
+html.dark .dark\:text-slate-300,
+html.dark .dark\:text-slate-400,
+html.dark .dark\:text-slate-500,
+html.dark .dark\:text-zinc-300,
+html.dark .dark\:text-zinc-400,
+html.dark .dark\:text-zinc-500 { color: #E8E4F0 !important; }
+
+/* === Sidebar === */
+html.dark #sidebar a,
+html.dark #sidebar span,
+html.dark #sidebar p,
+html.dark #sidebar button,
+html.dark #sidebar li { color: #D8D4E4 !important; }
+
+html.dark #sidebar a:hover,
+html.dark #sidebar button:hover { color: #FFFFFF !important; }
+
+/* === Table of contents === */
+html.dark #table-of-contents a,
+html.dark #table-of-contents span { color: #C8C4D8 !important; }
+
+html.dark #table-of-contents a:hover { color: #FFFFFF !important; }
+
+/* === Navbar === */
+html.dark #navbar a,
+html.dark #navbar span,
+html.dark #navbar button { color: #E8E4F0 !important; }
+
+/* === Misc === */
+html.dark .eyebrow { color: #A78BFA !important; }
+html.dark .step, html.dark [data-step] { color: #E8E4F0 !important; }
+html.dark .callout, html.dark [data-callout-type] { color: #E8E4F0 !important; }
+html.dark [role="tab"] { color: #D8D4E4 !important; }
+html.dark [role="tab"][aria-selected="true"] { color: #FFFFFF !important; }
+html.dark ::placeholder { color: #A8A4B8 !important; opacity: 1 !important; }
+html.dark thead th { color: #FFFFFF !important; background: rgba(255, 255, 255, 0.05) !important; }
+html.dark kbd { color: #FFFFFF !important; background: rgba(255, 255, 255, 0.12) !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; }
+html.dark #pagination a, html.dark #pagination span { color: #E8E4F0 !important; }
+html.dark footer a, html.dark footer span { color: #B8B4C8 !important; }
+
+/* === Syntax highlighting === */
+html.dark .token.comment, html.dark .token.prolog, html.dark .token.doctype { color: #9CA3AF !important; }
+html.dark .token.punctuation { color: #E5E7EB !important; }
+html.dark .token.property, html.dark .token.tag, html.dark .token.boolean, html.dark .token.number, html.dark .token.constant, html.dark .token.symbol { color: #FCA5A5 !important; }
+html.dark .token.selector, html.dark .token.attr-name, html.dark .token.string, html.dark .token.char, html.dark .token.builtin { color: #86EFAC !important; }
+html.dark .token.operator, html.dark .token.entity, html.dark .token.url { color: #E5E7EB !important; }
+html.dark .token.atrule, html.dark .token.attr-value, html.dark .token.keyword { color: #F9A8D4 !important; }
+html.dark .token.function, html.dark .token.class-name { color: #A78BFA !important; }
+html.dark .token.regex, html.dark .token.important, html.dark .token.variable { color: #FCD34D !important; }
