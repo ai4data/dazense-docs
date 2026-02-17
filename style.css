@@ -1,0 +1,82 @@
+/* Dark mode text contrast improvements for dazense docs */
+
+/* Body text: paragraphs, list items, table cells */
+.dark p,
+.dark li,
+.dark td,
+.dark th {
+  color: #E4E0ED !important;
+}
+
+/* Headings */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #FFFFFF !important;
+}
+
+/* Bold and strong text */
+.dark strong,
+.dark b {
+  color: #FFFFFF !important;
+}
+
+/* Links */
+.dark a {
+  color: #C4A4FF !important;
+}
+
+.dark a:hover {
+  color: #D8C4FF !important;
+}
+
+/* Sidebar text and labels */
+.dark #sidebar span,
+.dark #sidebar a,
+.dark #sidebar p,
+.dark #sidebar div {
+  color: #D8D4E4 !important;
+}
+
+/* Muted/description text used by Tailwind gray utilities */
+.dark .text-gray-400 {
+  color: #C0BCCC !important;
+}
+
+.dark .text-gray-500 {
+  color: #B8B4C4 !important;
+}
+
+.dark .text-slate-400 {
+  color: #C0BCCC !important;
+}
+
+.dark .text-slate-500 {
+  color: #B8B4C4 !important;
+}
+
+.dark .text-zinc-400 {
+  color: #C0BCCC !important;
+}
+
+.dark .text-zinc-500 {
+  color: #B8B4C4 !important;
+}
+
+/* Code blocks */
+.dark code {
+  color: #E8E4F0 !important;
+}
+
+/* Keyboard shortcuts */
+.dark kbd {
+  color: #E8E4F0 !important;
+}
+
+/* Table headers */
+.dark thead th {
+  color: #FFFFFF !important;
+}
