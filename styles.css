@@ -3,11 +3,14 @@
 	--mz-white: #ffffff;
 	--mz-primary-purple: #8142ff;
 	--mz-purple-dark: #aa80ff;
-	--mz-text-strong: rgba(255, 255, 255, 0.96);
-	--mz-text: rgba(255, 255, 255, 0.92);
-	--mz-text-muted: rgba(255, 255, 255, 0.9);
-	--mz-link: #f0e8ff;
+	--mz-text-strong: #ffffff;
+	--mz-text: #e8e4f0;
+	--mz-text-muted: #c8c4d8;
+	--mz-text-dim: #a8a4b8;
+	--mz-link: #d4c4ff;
 	--mz-link-hover: #ffffff;
+	--mz-border: rgba(255, 255, 255, 0.12);
+	--mz-code-bg: rgba(255, 255, 255, 0.08);
 }
 
 html,
@@ -23,21 +26,24 @@ body {
 }
 
 #navbar {
-	background: rgba(0, 0, 0, 0.6);
+	background: rgba(0, 0, 0, 0.8);
 	backdrop-filter: blur(10px);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-	color: var(--mz-text);
+	border-bottom: 1px solid var(--mz-border);
+	color: var(--mz-text-strong);
 }
 
 #sidebar {
-	background: #0f0f0f;
-	border-right: 1px solid rgba(255, 255, 255, 0.08);
+	background: #0a0a0a;
+	border-right: 1px solid var(--mz-border);
 	color: var(--mz-text);
 }
 
 #content-area h1,
 #content-area h2,
-#content-area h3 {
+#content-area h3,
+#content-area h4,
+#content-area h5,
+#content-area h6 {
 	font-family: 'Urbanist', sans-serif;
 	color: var(--mz-text-strong);
 }
@@ -47,6 +53,15 @@ body {
 #content-area td,
 #content-area th {
 	color: var(--mz-text);
+}
+
+/* Numbered lists and ordered list markers - critical for visibility */
+#content-area ol {
+	color: var(--mz-text);
+}
+
+#content-area ol li::marker {
+	color: var(--mz-text-muted);
 }
 
 #content-area span,
@@ -59,8 +74,35 @@ body {
 	color: var(--mz-text);
 }
 
+/* Placeholder text - ensure high visibility */
+#content-area input::placeholder,
+#content-area textarea::placeholder {
+	color: var(--mz-text-dim) !important;
+	opacity: 1 !important;
+}
+
+#content-area input::-webkit-input-placeholder,
+#content-area textarea::-webkit-input-placeholder {
+	color: var(--mz-text-dim) !important;
+	opacity: 1 !important;
+}
+
+#content-area input::-moz-placeholder,
+#content-area textarea::-moz-placeholder {
+	color: var(--mz-text-dim) !important;
+	opacity: 1 !important;
+}
+
+#content-area input:-ms-input-placeholder,
+#content-area textarea:-ms-input-placeholder {
+	color: var(--mz-text-dim) !important;
+	opacity: 1 !important;
+}
+
 #content-area a {
 	color: var(--mz-link);
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }
 
 #content-area a:hover {
@@ -69,20 +111,36 @@ body {
 
 #content-area code,
 #content-area pre {
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: var(--mz-code-bg);
+	border: 1px solid var(--mz-border);
 	color: var(--mz-text-strong);
 }
 
 #content-area code {
-	padding: 0.1em 0.3em;
+	padding: 0.15em 0.4em;
 	border-radius: 6px;
+	font-size: 0.9em;
+}
+
+#content-area pre code {
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+#content-area pre {
+	padding: 1rem;
+	border-radius: 8px;
+	overflow-x: auto;
 }
 
 #content-area kbd {
 	color: var(--mz-text-strong);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	background: rgba(255, 255, 255, 0.12);
+	padding: 0.2em 0.5em;
+	border-radius: 4px;
+	font-size: 0.85em;
 }
 
 #sidebar a,
@@ -91,8 +149,20 @@ body {
 #sidebar p,
 #sidebar li,
 #sidebar h2,
-#sidebar h3 {
+#sidebar h3,
+#sidebar button {
 	color: var(--mz-text) !important;
+}
+
+#sidebar a:hover {
+	color: var(--mz-text-strong) !important;
+}
+
+#sidebar .active,
+#sidebar .active a,
+#sidebar .active span {
+	color: var(--mz-white) !important;
+	background: rgba(129, 66, 255, 0.2) !important;
 }
 
 #table-of-contents,
@@ -103,6 +173,11 @@ body {
 	color: var(--mz-text-muted) !important;
 }
 
+#table-of-contents a:hover {
+	color: var(--mz-text-strong) !important;
+}
+
+/* Override Tailwind-style muted text colors with high-contrast values */
 .dark .text-gray-400,
 .dark .text-gray-500,
 .dark .text-gray-600,
@@ -121,6 +196,7 @@ body {
 	color: var(--mz-text-muted) !important;
 }
 
+/* Content area specific overrides - ensure all muted text is readable */
 .dark #content-area .text-gray-400,
 .dark #content-area .text-gray-500,
 .dark #content-area .text-gray-600,
@@ -139,9 +215,68 @@ body {
 	color: var(--mz-text) !important;
 }
 
+/* Tab panels and interactive elements */
 #content-area [role="tab"],
 #content-area [role="tablist"] button,
 #content-area .tab,
 #content-area .tabs button {
 	color: var(--mz-text) !important;
+}
+
+#content-area [role="tab"][aria-selected="true"],
+#content-area [role="tablist"] button[aria-selected="true"],
+#content-area .tab[aria-selected="true"],
+#content-area .tabs button[aria-selected="true"] {
+	color: var(--mz-text-strong) !important;
+}
+
+/* Step indicators and numbered items - critical fix for visibility */
+#content-area .step,
+#content-area .step-number,
+#content-area [data-step] {
+	color: var(--mz-text) !important;
+}
+
+/* Blockquotes and callouts */
+#content-area blockquote {
+	border-left: 3px solid var(--mz-primary-purple);
+	padding-left: 1rem;
+	color: var(--mz-text);
+}
+
+/* Tables */
+#content-area table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#content-area table th,
+#content-area table td {
+	border: 1px solid var(--mz-border);
+	padding: 0.75rem;
+	color: var(--mz-text);
+}
+
+#content-area table thead th {
+	background: rgba(255, 255, 255, 0.05);
+	color: var(--mz-text-strong);
+	font-weight: 600;
+}
+
+/* Images and figures */
+#content-area figure {
+	margin: 1.5rem 0;
+}
+
+#content-area figcaption {
+	color: var(--mz-text-muted);
+	font-size: 0.875rem;
+	margin-top: 0.5rem;
+}
+
+/* Horizontal rules */
+#content-area hr {
+	border: none;
+	border-top: 1px solid var(--mz-border);
+	margin: 2rem 0;
 }

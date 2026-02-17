@@ -1,14 +1,15 @@
 /* Dark mode text contrast improvements for dazense docs */
+/* All colors optimized for WCAG AA contrast ratio (minimum 4.5:1) on dark backgrounds */
 
-/* Body text: paragraphs, list items, table cells */
+/* Body text: paragraphs, list items, table cells - using solid colors for maximum contrast */
 .dark p,
 .dark li,
 .dark td,
 .dark th {
-  color: #E4E0ED !important;
+  color: #E8E4F0 !important;
 }
 
-/* Headings */
+/* Headings - pure white for maximum contrast */
 .dark h1,
 .dark h2,
 .dark h3,
@@ -24,59 +25,204 @@
   color: #FFFFFF !important;
 }
 
-/* Links */
+/* Ordered lists - ensure markers are visible */
+.dark ol {
+  color: #E8E4F0 !important;
+}
+
+.dark ol li::marker {
+  color: #C8C4D8 !important;
+}
+
+/* Links - light purple with underline for visibility */
 .dark a {
-  color: #C4A4FF !important;
+  color: #D4C4FF !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .dark a:hover {
-  color: #D8C4FF !important;
+  color: #FFFFFF !important;
 }
 
 /* Sidebar text and labels */
 .dark #sidebar span,
 .dark #sidebar a,
 .dark #sidebar p,
-.dark #sidebar div {
+.dark #sidebar div,
+.dark #sidebar button,
+.dark #sidebar h2,
+.dark #sidebar h3,
+.dark #sidebar li {
   color: #D8D4E4 !important;
 }
 
-/* Muted/description text used by Tailwind gray utilities */
+.dark #sidebar a:hover {
+  color: #FFFFFF !important;
+}
+
+/* Active sidebar items */
+.dark #sidebar .active,
+.dark #sidebar .active a,
+.dark #sidebar .active span {
+  color: #FFFFFF !important;
+  background: rgba(129, 66, 255, 0.25) !important;
+}
+
+/* Table of contents */
+.dark #table-of-contents,
+.dark #table-of-contents a,
+.dark #table-of-contents span,
+.dark #table-of-contents li,
+.dark #table-of-contents p {
+  color: #C8C4D8 !important;
+}
+
+.dark #table-of-contents a:hover {
+  color: #FFFFFF !important;
+}
+
+/* Muted/description text - Tailwind gray utilities with improved contrast */
 .dark .text-gray-400 {
-  color: #C0BCCC !important;
+  color: #C8C4D8 !important;
 }
 
 .dark .text-gray-500 {
-  color: #B8B4C4 !important;
+  color: #B8B4C8 !important;
+}
+
+.dark .text-gray-600 {
+  color: #A8A4B8 !important;
 }
 
 .dark .text-slate-400 {
-  color: #C0BCCC !important;
+  color: #C8C4D8 !important;
 }
 
 .dark .text-slate-500 {
-  color: #B8B4C4 !important;
+  color: #B8B4C8 !important;
+}
+
+.dark .text-slate-600 {
+  color: #A8A4B8 !important;
 }
 
 .dark .text-zinc-400 {
-  color: #C0BCCC !important;
+  color: #C8C4D8 !important;
 }
 
 .dark .text-zinc-500 {
-  color: #B8B4C4 !important;
+  color: #B8B4C8 !important;
 }
 
-/* Code blocks */
+.dark .text-zinc-600 {
+  color: #A8A4B8 !important;
+}
+
+.dark .text-neutral-400 {
+  color: #C8C4D8 !important;
+}
+
+.dark .text-neutral-500 {
+  color: #B8B4C8 !important;
+}
+
+.dark .text-neutral-600 {
+  color: #A8A4B8 !important;
+}
+
+/* Code blocks and inline code */
 .dark code {
-  color: #E8E4F0 !important;
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark pre {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark pre code {
+  background: transparent !important;
+  border: none !important;
 }
 
 /* Keyboard shortcuts */
 .dark kbd {
-  color: #E8E4F0 !important;
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Table headers */
 .dark thead th {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Placeholder text - critical for input visibility */
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #A8A4B8 !important;
+  opacity: 1 !important;
+}
+
+.dark input::-webkit-input-placeholder {
+  color: #A8A4B8 !important;
+  opacity: 1 !important;
+}
+
+.dark input::-moz-placeholder {
+  color: #A8A4B8 !important;
+  opacity: 1 !important;
+}
+
+.dark input:-ms-input-placeholder {
+  color: #A8A4B8 !important;
+  opacity: 1 !important;
+}
+
+/* Tab panels and interactive elements */
+.dark [role="tab"],
+.dark [role="tablist"] button,
+.dark .tab,
+.dark .tabs button {
+  color: #D8D4E4 !important;
+}
+
+.dark [role="tab"][aria-selected="true"],
+.dark [role="tablist"] button[aria-selected="true"],
+.dark .tab[aria-selected="true"],
+.dark .tabs button[aria-selected="true"] {
+  color: #FFFFFF !important;
+}
+
+/* Step indicators and numbered items */
+.dark .step,
+.dark .step-number,
+.dark [data-step] {
+  color: #D8D4E4 !important;
+}
+
+/* Blockquotes */
+.dark blockquote {
+  border-left-color: #8142FF !important;
+  color: #D8D4E4 !important;
+}
+
+/* Figure captions */
+.dark figcaption {
+  color: #B8B4C8 !important;
+}
+
+/* Navigation */
+.dark .navbar,
+.dark .navbar a,
+.dark .navbar span {
+  color: #E8E4F0 !important;
+}
+
+.dark .navbar a:hover {
   color: #FFFFFF !important;
 }
