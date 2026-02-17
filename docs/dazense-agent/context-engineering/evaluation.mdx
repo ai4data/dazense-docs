@@ -1,0 +1,220 @@
+---
+title: Evaluation
+description: The dazense test command allows you to measure your agent's performance on a set of unit tests created by you. It's meant to help you monitor and improve you...
+---
+
+> Test and evaluate your analytics agent with unit tests
+
+## Overview
+
+The `dazense test` command allows you to measure your agent's performance on a set of unit tests created by you. It's meant to help you monitor and improve your context's quality over time.
+
+## dazense test
+
+The `dazense test` command runs unit tests from your `tests/` folder, executes them against your agent, and compares results to verify correctness.
+
+### Create unit tests
+
+Create a `tests/` folder in your project root:
+
+```
+your-project/
+├── dazense_config.yaml
+├── RULES.md
+├── tests/                          # Test folder
+│   ├── total_revenue.yml          # Test file 1
+│   ├── customer_metrics.yml       # Test file 2
+│   └── outputs/                   # Test results (auto-generated)
+│       └── results_20250209_143022.json
+```
+
+Then create your test files. Each test is a YAML file in the `tests/` folder. Test files should have a `.yml` or `.yaml` extension.
+
+Test files follow this template:
+
+```yaml
+name: total_revenue
+prompt: What is the total revenue from all orders?
+sql: |
+  SELECT SUM(amount) as total_revenue
+  FROM orders
+```
+
+**Required fields:**
+
+* `name`: A descriptive name for the test
+* `prompt`: The question or prompt to test
+* `sql`: SQL query which produces the right data
+
+### Launch dazense test command
+
+Before running `dazense test`:
+
+* **Start the dazense chat server** (for example with `dazense chat` or your usual local setup) so that the backend API is available.
+* On the **first `dazense test` run**, the CLI will prompt you to log in in your browser — **use the same account you use in the local dazense chat interface**, so tests run under the same project and permissions.
+
+Run all tests:
+
+```bash
+dazense test
+```
+
+This will:
+
+* Discover all `.yml` and `.yaml` files in the `tests/` folder
+* Run each test against the default model (`openai:gpt-4.1`)
+* Display results in a summary table
+* Save detailed results to `tests/outputs/results_TIMESTAMP.json`
+
+**Specify LLM model to test:**
+
+```bash
+# Test with GPT 4.1
+dazense test -m openai:gpt-4.1
+```
+
+Model format: `provider:model_id`
+
+**Run tests in parallel:**
+
+```bash
+# Run with 4 parallel threads
+dazense test -t 4
+```
+
+This speeds up execution when running many tests, but output may be interleaved.
+
+### How It Works
+
+1. **Test Discovery**: Scans the `tests/` folder for `.yml` and `.yaml` files
+
+2. **Test Execution**: For each test:
+   * Sends the prompt to your agent and runs it normally (the agent may execute SQL queries, search context, etc.)
+   * Captures the agent's full conversation history, tool calls, and response text
+
+3. **Data Verification**:
+   * **Extract actual data**: a prompt is sent to the LLM with the full conversation history, asking it to extract the final answer as structured data.
+     The extraction prompt is:
+
+     ```text
+     Based on your previous analysis, provide the final answer to the original question.
+     Format the data with these columns: [expected columns]
+     Return the data as an array of rows, where each row is an object with the column names as keys.
+     If you cannot answer, set data to null.
+     ```
+
+   * The LLM responds with **structured data** formatted as a table matching the expected columns.
+
+   * **Execute expected SQL**: the `sql` query from your test file is executed against your database to get the expected results
+
+   * **Compare data**: the agent answer's data and expected data (from SQL execution) are compared
+
+4. **Data Comparison Process**:
+   * **Normalize datasets**: Both datasets are converted to DataFrames and normalized (resets index, infers types, and sorts columns alphabetically)
+   * **Row count match**: If row count doesn't match, they are not compared
+   * **Exact match**: First attempts exact equality comparison
+   * **Approximate match**: For numeric columns, uses numpy's `allclose` with tolerance (relative tolerance: 1e-5, absolute tolerance: 1e-8) to handle floating-point differences
+   * **Diff generation**: If both comparisons fail, generates a detailed diff showing where values differ
+
+5. **Result Collection**: Collects metrics including:
+   * Pass/fail status of the data diff
+   * Token usage and costs (inputs and outputs of the LLM)
+   * Execution duration
+   * Tool call count
+
+### Test Outputs
+
+**Console Output**
+
+The command displays a summary table with:
+
+* Test name
+* Model used
+* **Pass/fail** status
+* Message (e.g., "match", "values differ")
+* **Token usage**
+* **Cost**
+* **Execution time**
+* **Tool call count**
+* A final summary with total passed/failed counts
+
+**JSON Results File**
+
+Detailed results are saved to `tests/outputs/results_TIMESTAMP.json`:
+
+```json
+{
+  "timestamp": "2025-02-09T14:30:22.123456",
+  "results": [
+    {
+      "name": "total_revenue",
+      "model": "openai:gpt-4.1",
+      "passed": true,
+      "message": "match",
+      "tokens": 1250,
+      "cost": 0.0125,
+      "duration_ms": 234,
+      "tool_call_count": 1,
+      "details": {
+        "response_text": "...",
+        "actual_data": ["..."],
+        "expected_data": ["..."],
+        "tool_calls": ["..."]
+      }
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "total_tokens": 3750,
+    "total_cost": 0.0375,
+    "total_duration_ms": 702,
+    "total_duration_s": 0.7,
+    "total_tool_calls": 3,
+    "avg_duration_ms": 234,
+    "avg_tool_calls": 1.0
+  }
+}
+```
+
+## dazense test server
+
+The `dazense test server` command starts a web server to explore test results in a visual interface.
+
+The test server provides:
+
+* **Summary Dashboard**: Overview cards showing pass rate, total tests, tokens, costs, and duration
+* **Results Table**: Interactive table of all test runs with status, metrics, and details
+* **Detailed View**: Click any test to see:
+  * Full response text
+  * Tool calls with arguments and results
+  * Data comparison (actual vs expected)
+  * Diff view for failed tests
+  * Performance metrics
+
+Start the Server with:
+
+```bash
+dazense test server
+```
+
+This will start the test server on `http://localhost:8765`
+
+> The test server reads from `tests/outputs/`. Make sure you've run `dazense test` at least once to generate result files.
+
+## Best Practices
+
+### Creating Effective Tests
+
+1. **Start with critical queries**: Test the most important questions your users ask
+2. **Cover edge cases**: Include tests for boundary conditions and complex scenarios
+3. **Keep tests focused**: Each test should verify one specific behavior
+4. **Avoid overfitting and leakage**: Avoid including exact answers or overly specific details in your context that would allow the agent to "cheat" by pattern matching rather than actually understanding the context.
+
+### Integrating into Workflow
+
+1. **Version control**: Commit your `tests/` folder to git
+2. **CI/CD integration**: Run tests automatically on context changes
+3. **Regular evaluation**: Run tests weekly or after major context updates
+4. **Track trends**: Monitor pass rates and costs over time

@@ -1,0 +1,68 @@
+---
+title: Overview
+description: The dazense chat interface enables teams to interact with data through natural language queries.
+---
+
+The dazense chat interface enables teams to interact with data through natural language queries.
+
+## Getting Started
+
+### Launch Options
+
+**Command Line:**
+```bash
+dazense chat
+```
+This starts a local server at `http://localhost:5005`.
+
+**Docker with Example:**
+```bash
+docker run -d \
+  --name dazense \
+  -p 5005:5005 \
+  -e BETTER_AUTH_URL=http://localhost:5005 \
+  -e FASTAPI_URL=http://127.0.0.1:8005 \
+  dazense/dazense:latest
+```
+
+**Docker with Custom Project:**
+```bash
+docker run -d \
+  --name dazense \
+  -p 5005:5005 \
+  -e BETTER_AUTH_URL=http://localhost:5005 \
+  -e FASTAPI_URL=http://127.0.0.1:8005 \
+  -v /path/to/your/project:/app/project \
+  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/project \
+  dazense/dazense:latest
+```
+
+Access the interface at `http://localhost:5005`.
+
+> The chat interface operates locally. Data transmission to external servers only occurs when you configure an external LLM provider.
+
+## Querying Data
+
+**Entering Questions**
+- Input queries in conversational language
+- Reference earlier results in subsequent questions
+
+**Response Components**
+- **Answer**: Summary in plain language
+- **SQL Query**: Generated query (expandable)
+- **Data Table**: Tabular results
+- **Visualizations**: Automatic charts when relevant
+- **Sources**: Referenced context files
+
+## User Feedback
+
+Each response includes feedback options:
+- Thumbs up for positive responses
+- Thumbs down for problematic responses
+
+User feedback is retained for audit purposes.
+
+## Next Steps
+
+- [Chat Capabilities](/dazense-agent/chat/capabilities): Explore available agent features
+- [Slack Bot](/dazense-agent/chat/slack): Configure Slack team integration

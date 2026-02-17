@@ -1,0 +1,48 @@
+---
+title: Overview
+description: The Context Builder helps you build a file-system for your agent. This way you can have a full transparent view on the context your agent has access to, and ...
+---
+
+> Create the perfect context for your analytics agent
+
+## Why a Context Builder?
+
+The Context Builder helps you build a file-system for your agent. This way you can have a full transparent view on the context your agent has access to, and engineer the right way to:
+
+1. **Make it reliable for users** - Ensure consistent, accurate responses
+2. **Make it optimized** - Reduce costs, tokens usage, and improve speed
+
+Context is built with dazense using a CLI. The CLI will initialize your context repository and sync your context within this repo.
+
+## How It Works
+
+dazense uses a file-system approach to organize context:
+
+```
+your-project/
+├── dazense_config.yaml                    # Main configuration
+├── RULES.md                           # Agent behavior rules
+├── agent/                             # Agent tools and integrations
+│   ├── mcps/                          # Model Context Protocols
+│   └── tools/                         # Custom tools
+├── databases/                         # Database context
+├── docs/                              # Documentation files
+├── repos/                             # Cloned repositories
+├── semantics/                         # Semantic context
+└── queries/                           # Example queries
+```
+
+## Build Your Context
+
+Learn how to add different types of context:
+
+- **Databases** - Connect databases and sync schemas
+- **Repositories** - Add dbt projects and documentation
+- **Rules** - Define how your agent should behave
+
+## Next Steps
+
+- **Context Configuration** - Learn how to initialize and configure your dazense project
+- **Context Principles** - Core principles for optimizing your agent's performance
+- **Context Engineering Playbook** - Step-by-step guide to building effective context for your analytics agent
+- **Evaluation** - Test and evaluate your agent with unit tests

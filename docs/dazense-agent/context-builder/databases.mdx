@@ -1,0 +1,244 @@
+---
+title: Databases
+description: Connect your data warehouses and databases to give your agent access to your data schemas.
+---
+
+Connect your data warehouses and databases to give your agent access to your data schemas.
+
+## Supported Databases
+
+dazense supports all major data warehouses and databases:
+
+* **Snowflake**
+* **BigQuery**
+* **Databricks**
+* **PostgreSQL**
+* **Redshift**
+* **MySQL**
+* **SQL Server**
+* And more...
+
+## Adding a Database
+
+**During Initialization**
+
+When you run `dazense init`, you can add a database connection interactively:
+
+```bash
+dazense init
+```
+
+**Manual Configuration**
+
+Add database connections in your `dazense_config.yaml`:
+
+```yaml
+databases:
+  - name: production_warehouse
+    type: snowflake
+    host: account.snowflakecomputing.com
+    database: analytics
+    schema: public
+    user: ${SNOWFLAKE_USER}
+    password: ${SNOWFLAKE_PASSWORD}
+    warehouse: compute_wh
+```
+
+## Database Setup
+
+### Snowflake
+
+```yaml
+databases:
+  - name: snowflake_prod
+    type: snowflake
+    host: account.region.snowflakecomputing.com
+    database: analytics
+    schema: public
+    user: ${SNOWFLAKE_USER}
+    password: ${SNOWFLAKE_PASSWORD}
+    warehouse: compute_wh
+    role: analyst_role
+```
+
+### BigQuery
+
+```yaml
+databases:
+  - name: bigquery_prod
+    type: bigquery
+    project_id: my-project
+    dataset_id: analytics
+    credentials_path: /path/to/service-account.json
+    accessors:
+      - columns
+      - preview
+      - description
+      - profiling
+    include: []
+    exclude: []
+    sso: false
+    location: null
+```
+
+The service account should have **BigQuery User** role at minimum to read schemas and query tables.
+
+### Databricks
+
+```yaml
+databases:
+  - name: databricks_prod
+    type: databricks
+    host: dbc-12345678-9abc.cloud.databricks.com
+    http_path: /sql/1.0/warehouses/abc123
+    token: ${DATABRICKS_TOKEN}
+    catalog: main
+    schema: analytics
+```
+
+### PostgreSQL
+
+```yaml
+databases:
+  - name: postgres_prod
+    type: postgresql
+    host: postgres.example.com
+    port: 5432
+    database: analytics
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+```
+
+## Accessors
+
+Accessors define what information to extract from each table. Each accessor generates a specific context file:
+
+* **`columns`** — Column names, data types, and schema information
+* **`preview`** — Sample data rows (first N rows of the table)
+* **`description`** — Table descriptions and metadata
+* **`profiling`** — Data profiling statistics (null counts, unique values, min/max, etc.)
+
+You can select which accessors to use based on your needs:
+
+```yaml
+databases:
+  - name: my_database
+    type: bigquery
+    # ... connection details ...
+    accessors:
+      - columns      # Always recommended
+      - preview      # Useful for understanding data format
+      - description  # Adds business context
+      - profiling    # Helpful for data quality insights
+```
+
+## Synchronization
+
+Once configured, sync your database schemas:
+
+```bash
+dazense sync
+```
+
+This will:
+
+1. Connect to your database
+2. Extract schema information based on your accessors
+3. Save it to `context/databases/` as text files
+4. Make it available to your agent
+
+## Context Files
+
+After syncing, you'll see a hierarchical structure like:
+
+```
+context/
+└── databases/
+    └── type=bigquery/database=dazense-production/schema=prod_silver/
+        ├── table=dim_users/
+        │   ├── columns.md         # Column definitions and types
+        │   ├── description.md     # Table description
+        │   ├── preview.md         # Sample data preview
+        │   └── profiling.md       # Data profiling information
+        └── table=customers/
+            ├── columns.md
+            ├── description.md
+            ├── preview.md
+            └── profiling.md
+```
+
+Each table has files corresponding to the accessors you've configured.
+
+## Table Selection
+
+Control which tables to sync using `include` and `exclude` patterns.
+
+**Pattern Syntax**
+
+Use glob patterns to match table names:
+
+* `schema_name.table_name` — Exact match
+* `schema_name.*` — All tables in a schema
+* `*.table_name` — Table name across all schemas
+* `*_staging` — Tables ending with `_staging`
+* `test_*` — Tables starting with `test_`
+* `*` — All tables
+
+**Include Patterns**
+
+Specify which tables to sync (if empty, all tables are included):
+
+```yaml
+databases:
+  - name: production_warehouse
+    type: snowflake
+    # ... connection details ...
+    include:
+      - analytics.*        # All tables in analytics schema
+      - marts.dim_*        # All dimension tables in marts
+      - marts.fct_*        # All fact tables in marts
+```
+
+**Exclude Patterns**
+
+Specify which tables to exclude from syncing:
+
+```yaml
+databases:
+  - name: production_warehouse
+    type: snowflake
+    # ... connection details ...
+    exclude:
+      - *.temp_*           # Exclude all temp tables
+      - staging.*          # Exclude entire staging schema
+      - *_test             # Exclude tables ending with _test
+      - *_backup           # Exclude backup tables
+```
+
+**Combined Example**
+
+You can use both `include` and `exclude` together:
+
+```yaml
+databases:
+  - name: production_warehouse
+    type: snowflake
+    # ... connection details ...
+    include:
+      - analytics.*        # Start with all analytics tables
+      - marts.*            # And all marts tables
+    exclude:
+      - *.temp_*           # But exclude temp tables
+      - *_staging          # And staging tables
+      - *_backup           # And backup tables
+```
+
+When both `include` and `exclude` are specified, inclusion filtering is applied first, then exclusion rules filter from that result.
+
+## Best Practices
+
+When selecting tables to include in your context, aim for the optimal balance:
+
+* **Include enough tables** to answer your users' questions without exploratory queries
+* **Exclude irrelevant tables** to reduce token costs and improve focus
+* **Start small** with core business tables, then expand based on usage

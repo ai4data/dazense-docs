@@ -1,0 +1,167 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Dazense Docs",
+  "colors": {
+    "primary": "#8142FF",
+    "light": "#AA80FF",
+    "dark": "#6329D7"
+  },
+  "favicon": "/assets/favicon.png",
+  "logo": {
+    "light": "/assets/logo.png",
+    "dark": "/assets/logo.png"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://dazense.metazense.com"
+      },
+      {
+        "label": "Slack",
+        "href": "https://metazense.slack.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "/dazense-agent/quickstart"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Home",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Dazense Agent",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "dazense-agent/quickstart",
+              "dazense-agent/demo"
+            ]
+          },
+          {
+            "group": "Chat",
+            "pages": [
+              "dazense-agent/chat/overview",
+              "dazense-agent/chat/capabilities",
+              "dazense-agent/chat/slack",
+              "dazense-agent/chat/admin/setup",
+              "dazense-agent/chat/admin/monitoring"
+            ]
+          },
+          {
+            "group": "Context builder",
+            "pages": [
+              "dazense-agent/context-builder/overview",
+              "dazense-agent/context-builder/configuration",
+              "dazense-agent/context-builder/databases",
+              "dazense-agent/context-builder/repos",
+              "dazense-agent/context-builder/git-repository",
+              "dazense-agent/context-builder/custom-context",
+              "dazense-agent/context-builder/rules-context",
+              "dazense-agent/context-builder/synchronization"
+            ]
+          },
+          {
+            "group": "Semantic layer",
+            "pages": [
+              "dazense-agent/semantic-layer",
+              "dazense-agent/business-rules"
+            ]
+          },
+          {
+            "group": "Context engineering",
+            "pages": [
+              "dazense-agent/context-engineering/principles",
+              "dazense-agent/context-engineering/playbook",
+              "dazense-agent/context-engineering/evaluation"
+            ]
+          },
+          {
+            "group": "Cloud & developers",
+            "pages": [
+              "dazense-agent/cloud/overview",
+              "dazense-agent/developers/overview"
+            ]
+          },
+          {
+            "group": "Self-hosting",
+            "pages": [
+              "dazense-agent/self-hosting/deployment-guide"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Dazense IDE",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "dazense-ide/get-started/welcome",
+              "dazense-ide/get-started/download",
+              "dazense-ide/get-started/quickstart",
+              "dazense-ide/get-started/dazense-first-tour",
+              "dazense-ide/get-started/dazense-sandbox",
+              "dazense-ide/get-started/set-up-data-connection",
+              "dazense-ide/get-started/set-up-dbt",
+              "dazense-ide/get-started/releases"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "dazense-ide/features/work-with-sql",
+              "dazense-ide/features/work-with-dbt",
+              "dazense-ide/features/work-with-git",
+              "dazense-ide/features/work-with-terminal",
+              "dazense-ide/features/keyboard-shortcuts"
+            ]
+          },
+          {
+            "group": "Dazense AI",
+            "pages": [
+              "dazense-ide/dazense-ai/agent-chat",
+              "dazense-ide/dazense-ai/agent-context",
+              "dazense-ide/dazense-ai/agent-models",
+              "dazense-ide/dazense-ai/agent-rules",
+              "dazense-ide/dazense-ai/agent-tools",
+              "dazense-ide/dazense-ai/indexing",
+              "dazense-ide/dazense-ai/dazense-tab"
+            ]
+          },
+          {
+            "group": "Learn",
+            "pages": [
+              "dazense-ide/learn/prompt-library",
+              "dazense-ide/learn/rules-library",
+              "dazense-ide/learn/use-cases-library"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "dazense-ide/support/intro",
+              "dazense-ide/support/faq",
+              "dazense-ide/support/pricing-and-plans",
+              "dazense-ide/support/security"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

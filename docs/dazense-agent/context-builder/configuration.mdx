@@ -1,0 +1,230 @@
+---
+title: Configuration
+description: Initialize and configure your dazense project
+---
+
+Initialize and configure your dazense project
+
+## dazense init
+
+The `dazense init` command sets up your context repository with all necessary files and structure.
+
+**Run dazense init**
+
+```bash
+dazense init
+```
+
+The command will guide you through an interactive setup:
+
+**1. Project Name**
+
+```
+What is the name of your project?
+> my-analytics-agent
+```
+
+**2. Database Connection (Optional)**
+
+```
+Do you want to connect a database? [y/N]
+> y
+
+Select your database type:
+  1. Snowflake
+  2. BigQuery
+  3. Databricks
+  4. PostgreSQL
+  5. Redshift
+  6. MySQL
+```
+
+If you select yes, you'll be prompted for connection details specific to your database type.
+
+**3. Repository Context (Optional)**
+
+```
+Do you want to add a repository to your agent context? [y/N]
+> y
+
+Repository URL:
+> https://github.com/your-org/dbt-project
+
+Path within repo (optional):
+> models/
+```
+
+**4. LLM API Key (Optional)**
+
+```
+Do you want to add an LLM key? [y/N]
+> y
+
+Select your LLM provider:
+  1. OpenAI
+  2. Anthropic
+  3. Azure OpenAI
+  4. Other
+```
+
+**5. Slack Integration (Optional)**
+
+```
+Do you want to setup a Slack connection? [y/N]
+> y
+```
+
+You can skip any optional step and configure it later by editing `dazense_config.yaml`.
+
+**What Gets Created**
+
+After running `dazense init`, you'll have a folder with the architecture of your context:
+
+```
+my-analytics-agent/
+├── dazense_config.yaml          # Main configuration file
+├── RULES.md                 # Agent behavior rules
+├── agent/                   # Agent tools and integrations
+│   ├── mcps/               # Model Context Protocols
+│   └── tools/              # Custom tools
+├── databases/              # Database schemas (populated after sync)
+├── docs/                   # Documentation files
+└── queries/                # Example queries
+```
+
+## dazense sync
+
+Once initialized, populate your context with actual content:
+
+```bash
+dazense sync
+```
+
+This will:
+
+* Connect to configured databases and pull schemas
+* Clone configured repositories
+* Generate structured context files
+* Index content for your agent
+
+## dazense debug
+
+Verify your configuration:
+
+```bash
+dazense debug
+```
+
+This checks:
+
+* Configuration file syntax
+* Database connectivity
+* LLM API access
+* Environment variables
+* File permissions
+
+## dazense_config.yaml
+
+The `dazense_config.yaml` file is the central configuration for your analytics agent.
+You can always edit it and re-launch a sync with this configuration.
+
+**Basic Structure**
+
+```yaml
+project_name: my-analytics-agent
+
+# Database Connections
+databases:
+  - name: bigquery-prod
+    type: bigquery
+    project_id: my-project
+    dataset_id: analytics
+    # Option 1: Use credentials_path for local files
+    credentials_path: /path/to/credentials.json
+    # Option 2: Use credentials_json for environment variables (recommended for cloud deployments)
+    # credentials_json: {{ env('GCP_SERVICE_ACCOUNT_KEY_JSON') }}
+    accessors:
+      - columns
+      - preview
+      - description
+      - profiling
+    include: []
+    exclude: []
+    sso: false
+    location: US
+
+# Repository Integrations
+repos:
+  - name: dbt
+    url: https://github.com/your-org/dbt-project.git
+    branch: main
+
+# LLM Configuration
+llm:
+  provider: anthropic
+  api_key: {{ env('ANTHROPIC_API_KEY') }}
+
+# Slack Integration (optional)
+slack:
+  bot_token: {{ env('SLACK_BOT_TOKEN') }}
+  signing_secret: {{ env('SLACK_SIGNING_SECRET') }}
+  post_message_url: https://slack.com/api/chat.postMessage
+```
+
+**Environment Variables**
+
+> **Warning:** Never commit sensitive credentials to Git! Always use environment variables for secrets.
+
+Store sensitive values in environment variables:
+
+```bash
+# .env file (add to .gitignore)
+OPENAI_API_KEY=sk-...
+SNOWFLAKE_USER=my_user
+SNOWFLAKE_PASSWORD=my_password
+SLACK_BOT_TOKEN=xoxb-...
+SLACK_SIGNING_SECRET=...
+```
+
+Reference them in your config:
+
+```yaml
+api_key: {{ env('OPENAI_API_KEY') }}
+user: {{ env('SNOWFLAKE_USER') }}
+password: {{ env('SNOWFLAKE_PASSWORD') }}
+```
+
+**Warehouse Credentials**
+
+For Warehouse credentials, you can use either method:
+
+**Method 1: credentials_path (local development)**
+
+```yaml
+databases:
+  - name: bigquery-prod
+    type: bigquery
+    project_id: my-project
+    dataset_id: analytics
+    credentials_path: /path/to/service-account.json
+```
+
+**Method 2: credentials_json (cloud deployments)**
+
+```yaml
+databases:
+  - name: bigquery-prod
+    type: bigquery
+    project_id: my-project
+    dataset_id: analytics
+    credentials_json: {{ env('GCP_SERVICE_ACCOUNT_KEY_JSON') }}
+```
+
+Use `credentials_json` for cloud deployments (Cloud Run, GitHub Actions, etc.) where you store the full JSON content in an environment variable or secret manager. Use `credentials_path` for local development with credential files.
+
+When using `credentials_json`, the environment variable must contain the **entire JSON content** of your service account key file, not just the path.
+
+**Next Steps**
+
+- **Context Synchronization** - Learn how to sync and update your agent's context
+- **Context Principles** - Learn how to optimize your context for reliability, speed, and cost

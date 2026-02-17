@@ -1,0 +1,70 @@
+---
+title: Work with SQL
+description: dazense can replace your data warehouse console. It is directly connected to your data and lets you preview, query, and auto-complete your SQL.
+---
+
+dazense can replace your data warehouse console. It is directly connected to your data and lets you preview, query, and auto-complete your SQL.
+
+## Browse your database
+
+You can browse available data from dazense's left panel in the "Warehouse" tab. From the data tree you can:
+
+* View all tables available
+* Search for a table
+* Preview a table and see its list of columns
+* Start a query on a table by clicking on `<…>` icon
+
+**Tip:** Press <kbd>⌘</kbd> + <kbd>B</kbd> to open or close the left sidebar at any time.
+
+## Write SQL queries
+
+### Data warehouse console features
+
+dazense provides the same features as any data warehouse console:
+
+* **Auto-complete of tables and column names**: every time you type "space", a dropdown with available tables/columns will appear.
+* **BigQuery dry run**: for BigQuery connections, dazense will show dry run results, with errors and cost of query in GB.
+
+### AI auto-complete
+
+On top of regular auto-complete, dazense's AI tab provides "AI suggestion" to complete your SQL code. These suggestions are based on your data and column metadata to suggest code matching your actual data schema.
+
+### Fix SQL in chat
+
+When your SQL has an error, use the "Fix in chat" button to send the query error to the agent for correction.
+
+## Run SQL queries
+
+In dazense, execute any SQL query by pressing <kbd>⌘</kbd> + <kbd>⏎</kbd> (cmd + enter). You can also execute queries with dbt syntax if configured.
+
+**Multi-query execution:**
+
+* If you have multiple SQL queries in a single file, dazense will execute the query where your cursor is
+* You can also select a portion of SQL and run it with <kbd>⌘</kbd> + <kbd>⏎</kbd>
+
+## Create SQL worksheets
+
+You can create SQL worksheets within dazense for adhoc query writing. These worksheets are saved within dazense in the "SQL worksheets" tab.
+
+To create a worksheet, click the **"+" button** from an SQL file, or go to the **"worksheet" tab** on the left panel. From this panel, you can rename, delete, or open your worksheets.
+
+## Data preview
+
+In dazense data preview you can:
+
+* **Sorting**: Click column headers to sort data ascending or descending
+* **Pagination**: Navigate through large result sets with pagination controls
+* **Cell Selection**: Click to select individual cells
+* **Row Selection**: Select entire rows for analysis
+* **Column Selection**: Select entire columns
+* **Zoom in Cell**: Double click on a cell to see the full value when it's truncated
+* **Sum/Count Display**: See the sum and count of selected cells/rows in the preview
+* **Export to csv**: Export query results to a csv file
+
+**Keyboard Shortcut:** Open or close the data preview panel with <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>J</kbd>.
+
+## Data diff
+
+When you change SQL code, dazense allows you to preview corresponding changes in the data. Click on **"table diff"** in the preview section to see a highlighted version of additions and deletions in your data.
+
+This table diff is based on the last commit of your branch. It shows data differences between running code in the last commit and current code of the file.

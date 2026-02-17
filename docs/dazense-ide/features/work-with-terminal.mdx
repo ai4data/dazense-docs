@@ -1,0 +1,24 @@
+---
+title: Work with terminal
+description: Press <kbd>⌘</kbd> + <kbd>J</kbd> to toggle the terminal drawer at any time.
+---
+
+## Open and manage the terminal
+
+* Press <kbd>⌘</kbd> + <kbd>J</kbd> to toggle the terminal drawer at any time.
+* Use the `+` icon in the terminal header to open multiple shells (bash, zsh, python, etc.).
+* Each workspace remembers the shells you had open, so you can pick up where you left off.
+
+## Fix terminal errors in chat
+
+Whenever a terminal command fails, dazense highlights the error and shows a **Fix in chat** button. Click it to send the command and its stderr to dazense AI—the agent will propose a corrected command or patch, and you can apply it back to the terminal with one click.
+
+## Let dazense AI run terminal commands
+
+From the chat sidebar you can ask dazense AI to run terminal commands on your behalf (for example, "run tests" or "install dependencies"). The agent will:
+
+1. Suggest the command it plans to run.
+2. Wait for your approval.
+3. Execute the command in the integrated terminal and stream back the output.
+
+You can read more about command execution permissions and guardrails in the [dazense agent tools](/dazense-ide/dazense-ai/agent-tools).

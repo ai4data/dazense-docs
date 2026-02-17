@@ -1,0 +1,35 @@
+---
+title: Rules Library Documentation
+description: The Rules Library offers .naorules file examples and templates for customizing dazense agent behavior, with the complete documentation index available at .
+---
+
+## Overview
+The Rules Library offers `.naorules` file examples and templates for customizing dazense agent behavior, with the complete documentation index available at .
+
+## SQL Style Guidelines
+
+**Standard SQL Formatting** recommends using CTEs for complex queries, snake_case naming conventions, business logic comments, explicit JOINs, and meaningful table aliases.
+
+**dbt-Specific Rules** emphasize following the dbt style guide, including model documentation, using `ref()` functions instead of direct references, organizing related models together, and adding tests for critical models.
+
+## Code Style Standards
+
+**Python Development** requires PEP 8 compliance, type hints for function parameters, docstrings for all functions, and a 100-character maximum line length.
+
+**General Code Practices** stress self-documenting code, focused functions, descriptive variable names, and comments for complex business logic.
+
+## Team-Specific Standards
+
+**Documentation Standards** mandate README.md files in new projects, environment variable documentation, maintained changelogs, and clear commit messages.
+
+**Workflow Rules** establish feature branch requirements, pre-commit testing, code review processes, and documentation updates alongside code changes.
+
+## Domain-Specific Practices
+
+**Data Quality Rules** require data type validation, null value checks on critical columns, dbt data quality tests, and documented data sources and transformations.
+
+**Analytics Rules** emphasize consistent metric definitions, documented calculation methods, timezone information in date fields, and validation against known benchmarks.
+
+## Implementation Approach
+
+Users should select templates matching their needs, customize for team standards, save as `.naorules` in the project root, and allow automatic agent integration. The documentation recommends starting with essential rules, regular reviews, team sharing, and agent testing.

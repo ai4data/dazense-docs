@@ -1,0 +1,123 @@
+---
+title: Data Connection Documentation
+description: Data connection is fundamental to dazense's functionality, enabling users to browse, view, and query data directly within the IDE while providing data schema...
+---
+
+## Overview
+
+Data connection is fundamental to dazense's functionality, enabling users to browse, view, and query data directly within the IDE while providing data schema context to AI features.
+
+### Data Privacy
+
+"When you connect a data warehouse to dazense, your connection stays between your computer and the data warehouse. No data content is ever sent to dazense servers or the LLM." Only metadata such as table and column names are utilized to furnish warehouse context to dazense features.
+
+## Adding a Data Connection
+
+Navigate to Settings > Warehouse Connections > Add Connection to establish a new data connection.
+
+### Supported Data Warehouses
+
+dazense supports connections to multiple data warehouse platforms:
+
+#### BigQuery
+
+- **connection_name** (required): Display identifier for the connection
+- **project_ids** (required): Comma-separated project identifiers with wildcard and exclusion support
+- **region** (optional): BigQuery location specification
+- **datasets** (optional): Specific dataset scope limitation
+- **authentication_method** (required): SSO via OAuth or Service Account authentication
+- **service_account_private_key** (conditional): JSON key file for Service Account method
+
+Users can connect multiple BigQuery projects using patterns like comma-separated values, wildcards (project_*), or exclusions (!project2).
+
+Query size limits can be configured in Settings > Warehouse Connections to automatically cancel executions exceeding specified GB thresholds.
+
+#### Snowflake
+
+- **connection_name** (required): Custom display label
+- **account_id** (required): Snowflake account identifier without domain suffix
+- **warehouse** (required): Target warehouse for query execution
+- **role** (optional): Role override capability
+- **databases** (optional): Supports filtering with comma-separated values, wildcards, and exclusions
+- **schemas** (optional): Schema-level filtering with same pattern support
+- **authentication_method** (required): Password, SSO, or Key Pair Authentication options
+
+Password-based authentication requires dual MFA approval through DUO when testing and saving connections.
+
+#### PostgreSQL
+
+- **connection_name** (required): Friendly connection identifier
+- **host** (required): Hostname or IP address
+- **port** (required, default: 5432): PostgreSQL listening port
+- **database** (required): Target database specification
+- **username** (required): Authentication user
+- **password** (required): Securely stored credential
+- **advanced_options.ssh** (optional): SSH tunnel enablement with authentication
+- **advanced_options.ssl_tls** (optional): SSL/TLS encryption configuration
+
+#### Databricks
+
+- **connection_name** (required): Workspace connection identifier
+- **server_hostname** (required): Workspace hostname specification
+- **http_path** (required): SQL warehouse or cluster path
+- **default_catalog** (optional): Default catalog selection
+- **default_schema** (optional): Default schema fallback
+- **authentication_method** (required): OAuth U2M or Personal Access Token
+- **personal_access_token** (conditional): Required for token-based authentication
+
+#### Amazon Redshift
+
+- **connection_name** (required): Connection label
+- **host** (required): Cluster endpoint specification
+- **port** (required, default: 5439): Connection port
+- **database** (required): Default database designation
+- **username** (required): User with schema access
+- **password** (required): User credential
+- **advanced_options.ssh** (optional): SSH tunnel configuration
+- **advanced_options.ssl_tls** (optional): SSL/TLS enablement
+
+#### ClickHouse
+
+- **connection_name** (required): Connection identifier
+- **authentication_method** (required): HTTPS or Local selection
+- **url** (required): Complete instance URL with protocol and port
+- **username** (required): ClickHouse user credential
+- **password** (required): User password
+- **database** (optional): Database specification for discovery
+
+#### Amazon Athena
+
+- **connection_name** (required): Connection identifier
+- **region** (required): AWS region specification
+- **access_key_id** (required): IAM access credential
+- **secret_access_key** (required): Paired secret credential
+- **database** (optional): Default database specification
+
+#### DuckDB
+
+- **connection_name** (required): Connection label
+- **database_type** (required): File Database or In-Memory Database selection
+- **database_file_path** (conditional): File path for File Database type
+- **schema_filter** (optional): Comma-separated schema listing
+- **read_only_mode** (optional): Protection against database modifications
+
+#### MotherDuck
+
+MotherDuck connections utilize the same configuration flow as DuckDB connections.
+
+## Data Verification
+
+After establishing a connection, verify data connectivity by opening the left panel and clicking the data warehouse icon to view all accessible tables. Individual tables can be previewed directly within dazense.
+
+## Managing Multiple Connections
+
+dazense permits simultaneous connections to multiple databases with two configuration options:
+
+- **Global Connection**: Available across all dazense folders
+- **Workspace Connection**: Restricted to specific workspace attachment
+
+Users can toggle these settings by hovering over connections to reveal options like "Attach to workspace" or "Make global."
+
+### Active Connection Management
+
+"Only one connection is active at once in dazense." The active connection can be selected from the left data tree or through dazense settings/data connections menu using visual indicators.

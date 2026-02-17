@@ -1,0 +1,34 @@
+---
+title: Business Rules
+description: Encode governance rules so answers follow your business logic.
+---
+
+Business rules are guardrails that prevent incorrect metrics (for example, excluding cancelled orders from revenue).
+
+## Define rules
+
+Create `semantics/business_rules.yml`:
+
+```yaml
+rules:
+  - name: cancelled_orders_excluded
+    category: metrics
+    severity: critical
+    applies_to: [orders.total_revenue, orders.avg_order_value]
+    description: Revenue metrics must exclude cancelled orders
+    guidance: Always filter status != 'cancelled' when computing revenue
+
+  - name: test_customers
+    category: data_quality
+    severity: warning
+    applies_to: [customers]
+    description: Test customers exist in the data
+    guidance: Filter out customer_id > 100 for production analysis
+```
+
+## Best practices
+
+- Keep critical rules short and unambiguous.
+- Attach rules to specific metrics where possible.
+- Use `warning` for data quality caveats and `info` for guidance.
+- Keep additional narrative context in `RULES.md`.

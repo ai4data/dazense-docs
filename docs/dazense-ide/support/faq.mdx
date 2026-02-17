@@ -1,0 +1,334 @@
+---
+title: FAQ
+description: You can view the query definition behind a database view using the agent. Ask the agent to "show me the query for view viewname" or use the agent's warehouse...
+---
+
+> Frequently asked questions about dazense
+
+## How do I see a query behind a view in dazense?
+
+You can view the query definition behind a database view using the agent. Ask the agent to "show me the query for view [view_name]" or use the agent's warehouse tools to get the view query definition.
+
+## You need to open a folder in dazense so the agent creates files
+
+To allow the agent to create files, you must first open a folder or repository in dazense. The agent can only create and edit files within an open workspace.
+
+## How to open terminal in dazense?
+
+You can open the terminal in dazense using <kbd>⌘</kbd> + <kbd>J</kbd>.
+
+## How can I analyze a CSV in dazense?
+
+To analyze a CSV file in dazense:
+
+1. Connect to DuckDB (which supports CSV files directly)
+2. Import your CSV file into DuckDB
+3. Use the agent to query and analyze the data
+4. Alternatively, you can use SQL worksheets to write queries against your CSV data
+
+**DuckDB CSV Support**: DuckDB can read CSV files directly, making it easy to analyze CSV data without importing into a traditional database.
+
+## dazense can't work with dbt cloud, only dbt core
+
+dazense works exclusively with **dbt Core**. dbt Cloud is not supported. Make sure you're using dbt Core in your local environment.
+
+## Why should I configure dbt in dazense?
+
+When dbt is fully configured in dazense you unlock:
+
+* Execute & preview dbt models directly in the IDE
+* Auto-complete for model columns plus quick navigation to refs
+* Column-level lineage in the agent experience
+
+Even without configuring dbt you still keep the agent's ability to create or edit dbt models, sources, documentation, and tests.
+
+## Where can I find my dazense chat history?
+
+Your chat history is automatically saved and can be accessed from the chat interface. All your conversations are maintained per workspace and are available in the chat sidebar. You can:
+
+* Access previous conversations from the chat history
+* Continue conversations from where you left off
+* Reference past conversations and their context
+
+## Is there a shortcut to execute SQL?
+
+Yes! You can execute SQL queries using <kbd>⌘</kbd> + <kbd>⏎</kbd>. This runs the query at your cursor position.
+
+**Multi-query execution**: If you have multiple queries in a file, dazense will execute the query where your cursor is located.
+
+## dazense can't work with remote env
+
+dazense requires a local environment and cannot work with remote dbt environments. Your dbt project must be set up locally on your machine where dazense is running.
+
+## How to update dazense?
+
+To update dazense:
+
+1. **macOS**: Download the latest version from the download page and install it
+2. **Windows**: Download the latest version from the download page and install it
+
+Updates are typically available on the releases page. dazense will notify you when updates are available.
+
+## Where can I get my dazense invoices?
+
+For invoice information, please contact claire@dazense.metazense.com or reach out through the Support page.
+
+## Is there a Linux version?
+
+No, there is currently no Linux version of dazense. However, a Linux version is planned for release in **2026**.
+
+**Current Platforms**: dazense is currently available for:
+
+* macOS (Apple Silicon and Intel)
+* Windows
+
+Linux support is coming in 2026.
+
+## How do I connect multiple databases?
+
+You can connect multiple databases simultaneously in dazense. Go to Settings > Warehouse Connections > Add Connection to add additional databases. Each connection can be set as global (available across all workspaces) or attached to a specific workspace.
+
+## Can I use dazense without a data connection?
+
+Yes, you can use dazense without a data connection. The agent can still help with codebase-related tasks, dbt model creation, and general coding assistance. However, features like SQL execution, data preview, and data analysis require a data connection.
+
+## How does dazense handle my data privacy?
+
+dazense takes data privacy seriously:
+
+* Only table schemas (metadata) are sent to the agent, not actual data
+* You control what data is shared with the LLM through the share/preview options
+* Codebase indexing only stores embeddings, not your actual code
+* Your data content is never accessed during indexing
+
+## What AI models can I use with dazense?
+
+dazense supports multiple AI models including:
+
+* **Claude** (3.5 Sonnet, 3.7 Sonnet, 3 Opus, 3.5 Haiku)
+* **GPT** (GPT-4o, GPT-4o-mini, GPT-5, GPT-5.1, gpt-oss)
+* **Gemini** (2.5 Flash, 2.5 Pro)
+* **Mistral** (Large, Small)
+* **AWS Bedrock** (various models)
+
+You can switch between models directly in the chat interface.
+
+## How do I customize the agent's behavior?
+
+You can customize the agent using a `.naorules` file in your project root. This file allows you to set:
+
+* Code style preferences (SQL formatting, naming conventions)
+* Agent behavior (language, tone, documentation habits)
+* Project-specific standards and best practices
+
+The agent can also read `claude.md` files for additional guidelines.
+
+## Can I use my own API keys?
+
+Yes, Enterprise plan users can use their own API keys for LLM models (OpenAI, Anthropic, Bedrock, or Gemini). This allows you to control costs and maintain compliance with your organization's security policies.
+
+## How do I share query results with the agent?
+
+You can share query results with the agent using <kbd>⌘</kbd> + <kbd>L</kbd>. After executing a query, select the results and use the shortcut, or click "Share" when viewing results. You can also use "Preview local" to view results privately without sharing with the LLM.
+
+## What databases does dazense support?
+
+dazense supports the following databases:
+
+* **BigQuery** (Service Account, SSO)
+* **Snowflake** (User Password, SSO, Key Pair)
+* **Postgres** (SSH, SSL, TLS)
+* **Redshift** (SSH, SSL, TLS)
+* **ClickHouse** (HTTPS)
+* **Databricks** (Personal Access Token, OAuth U2M)
+* **DuckDB** (Local file)
+* **MotherDuck**
+* **Amazon Athena** (AWS Access Keys)
+
+## How do I preview dbt models?
+
+To preview dbt models, ensure your dbt project is set up in dazense, then simply click the execute button (or press <kbd>⌘</kbd> + <kbd>⏎</kbd>) while viewing a dbt model file. dazense will compile and execute the model, showing you the results.
+
+## Can I use dazense with multiple workspaces?
+
+Yes, you can open multiple folders/repositories in dazense, but only the first one will be in the agent's context. Each workspace maintains its own:
+
+* Data connections
+* dbt configuration
+* Chat history
+* Indexed codebase
+
+## How do I see the lineage of a dbt model?
+
+You can view dbt lineage by clicking the lineage icon in the top right toolbar. If you have a dbt model file open, the lineage will be centered on that model. You can expand nodes, navigate dependencies, and click on models to open their files.
+
+## What happens if my BigQuery connection times out?
+
+dazense automatically reconnects to BigQuery if the refresh token expires. If you experience connection issues, check your connection settings in Settings > Warehouse Connections and verify your credentials are still valid.
+
+## Can I export query results?
+
+Yes, you can export query results to CSV format. In the data preview panel, click the download icon to save your results as a CSV file.
+
+## How do I set query size limits for BigQuery?
+
+To set query size limits for BigQuery:
+
+1. Go to Settings > Warehouse Connections
+2. Select your BigQuery connection
+3. Set the query size limits in the connection settings
+
+This helps prevent expensive queries and control costs.
+
+## What is the difference between Free, Trial, and Pro plans?
+
+* **Free Plan**: 5 prompts per day, basic features, limited AI models
+* **Free Trial**: 20 prompts per 3 hours, full feature access, all AI models (converts to Free after trial)
+* **Pro Plan**: Unlimited prompts, all features, all AI models, team collaboration, priority support
+
+## How do I add team members to my Pro plan?
+
+To add team members:
+
+1. Go to Settings > Team Management
+2. Click "Add Team Member"
+3. Enter their email address
+4. They'll receive an invitation to join your workspace
+
+To add more seats to your license, go to Settings > Billing > Manage Subscription > Add Seats.
+
+## Can I use dazense offline?
+
+No, dazense requires an internet connection to function. The AI models, codebase indexing, and data warehouse connections all require network access.
+
+## How do I troubleshoot connection issues?
+
+If you're having connection issues:
+
+1. Verify your credentials are correct
+2. Check that your firewall/network allows connections
+3. For BigQuery, ensure your refresh token hasn't expired
+4. For Snowflake, verify your account, warehouse, and role settings
+5. Check the connection status in Settings > Warehouse Connections
+
+If problems persist, contact support.
+
+## What file types does dazense index?
+
+dazense indexes all files in your repository except those in `.gitignore` or `.naoignore`. This includes:
+
+* SQL files
+* dbt models
+* Python scripts
+* Configuration files (YAML, JSON, etc.)
+* Documentation files
+* Any other text-based files
+
+Binary files and files in `.gitignore` or `.naoignore` are excluded from indexing.
+
+## How do I exclude files from indexing?
+
+You can exclude files from indexing by:
+
+1. Adding them to your `.gitignore` file (they'll be automatically excluded)
+2. Creating a `.naoignore` file in your project root with patterns for files/folders to exclude
+
+The `.naoignore` file uses the same syntax as `.gitignore`.
+
+## Can I use dazense with Git?
+
+Yes, dazense works seamlessly with Git. You can:
+
+* Run Git commands in the terminal (git add, commit, push, etc.)
+* Have the agent execute Git operations
+* View diffs and changes
+* The agent can help with Git workflows
+
+The terminal in dazense works the same as VS Code's terminal.
+
+## How do I see what the agent is doing?
+
+When the agent is working, you can see:
+
+* A blue dot indicator on the active chat tab
+* Real-time reasoning display (for reasoning models like GPT-5, Gemini 2.5 Pro)
+* Tool execution status in the chat
+* File changes as they're suggested
+
+The agent shows its progress and reasoning in real time.
+
+## What are MCPs and how do I use them?
+
+MCPs (Model Context Protocol) allow dazense to integrate with external tools and services. dazense comes with pre-integrated MCPs including Notion, Git, Airbyte, Omni, Tableau, Elementary, and Select Star. You can also add custom MCPs in Settings > Agent > MCPs.
+
+## How do I change the AI model in a chat?
+
+Click on the model selector in the chat header to switch between different LLM models. You can change models at any time during a conversation, though starting a new chat when switching to a significantly different model is recommended for best results.
+
+## Can the agent create charts from my data?
+
+Yes! The agent can create various types of charts from query results:
+
+* Bar charts
+* Line charts
+* Pie charts
+
+Simply ask the agent to "show me a chart" or "create a visualization" of your data.
+
+## How do I know if my dbt setup is working?
+
+When your dbt project is configured correctly, you'll see a checkmark (✓) in the bottom left of dazense. If there's an issue, you'll see an X. Click on the dbt status indicator to open the configuration panel and troubleshoot.
+
+## What is the sandbox and how do I use it?
+
+The dazense sandbox is a pre-configured environment with:
+
+* A sample dbt project (jaffle shop)
+* DuckDB connection with sample data
+* Full access to all dazense features
+
+It's perfect for testing dazense without setting up your own project.
+
+## Can I use dazense with Jupyter notebooks?
+
+Yes, the agent can read the full content of notebooks and help you work with them. You can add notebooks to the agent context and ask questions about them or request modifications.
+
+## How do I see the cost of a BigQuery query before running it?
+
+For BigQuery queries, the cost is displayed in the bottom bar even before you run the query. It shows the estimated cost and indicates if the dry run is successful. This helps you understand query costs before execution.
+
+## What keyboard shortcuts are available?
+
+dazense supports many keyboard shortcuts:
+
+* <kbd>⌘</kbd> + <kbd>⏎</kbd>: Execute SQL query
+* <kbd>⌘</kbd> + <kbd>L</kbd>: Send selected code/results to agent
+* <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>J</kbd>: Open/close data preview
+* <kbd>⌘</kbd> + <kbd>J</kbd>: Open terminal
+* <kbd>⌘</kbd> + click: Jump to definition
+
+## How do I rename a chat?
+
+Double-click on the chat tab name to rename it. This helps you organize multiple conversations and find specific chats later.
+
+## Can I use dazense without opening a repository?
+
+Yes, you can use dazense in "data connection only" mode without opening a repository. This allows you to:
+
+* Create SQL worksheets
+* Execute queries
+* Use the agent for data analysis
+* Preview tables
+
+However, codebase-related features require an open repository.
+
+## What happens when I reach my prompt limit?
+
+If you're on the Free plan (5 prompts/day) or Free Trial (20 prompts/3 hours), you'll see a message when you reach your limit. You can:
+
+* Wait for the limit to reset (midnight for Free, 3 hours for Trial)
+* Upgrade to Pro for unlimited prompts
+
+## How do I enable auto-apply for agent changes?
+
+Enable the "Edit" button in the chat to allow the agent to auto-apply changes to your files. Once enabled, the agent will edit your code directly based on your requests. You can always review and accept/reject changes.

@@ -1,0 +1,80 @@
+---
+title: Tools
+description: Codebase
+---
+
+## dazense Tools
+
+**Codebase**
+* Search codebase
+* Get content of a file
+* Grep tool (search code and data warehouse)
+* Search/replace tool
+* Read full content of notebooks
+
+**dbt**
+* Get dependencies of a dbt model
+* Find source yaml of a dbt model
+* Find documentation yaml of a dbt model
+* Execute dbt commands (run, build, test)
+* Create dbt models, sources, documentation, and tests
+
+**Warehouse**
+* Search datawarehouse
+* Get schema of a table
+* Data profiling (count rows, null values, value distribution)
+* Get view query definition
+
+**Analytics**
+* Execute a query on the warehouse
+* Generate charts from query results in the chat
+* Analyze query results sent from worksheets
+
+**Terminal**
+* Run terminal commands
+* Fix terminal errors in chat
+* Execute Git operations
+* Run build scripts and tests
+
+## MCPs
+
+dazense supports MCP (Model Context Protocol), allowing the agent to integrate with external tools and services through standardized protocols. MCPs enable the agent to access additional capabilities beyond the built-in tools.
+
+**What are MCPs?**
+
+MCPs provide a standardized way for AI agents to interact with external systems, APIs, and tools. This allows dazense to extend its capabilities by connecting to custom tools and services.
+
+MCP integration is available in the agent, allowing you to leverage external tools and services directly within your dazense conversations.
+
+**Pre-integrated MCPs**
+
+dazense comes with several pre-integrated MCPs that you can use immediately:
+
+* Notion: Access and manage Notion pages and databases
+* Git: Interact with Git repositories and perform version control operations
+* Airbyte: Connect to Airbyte for data integration workflows
+* Omni: Integration with Omni tools and services
+* Tableau: Access Tableau workbooks and data sources
+* Elementary: Data quality and monitoring tools
+* Select Star: Data catalog and discovery platform
+
+These MCPs are available out of the box and can be enabled in your dazense settings.
+
+**Adding Custom MCPs**
+
+You can add custom MCPs to extend dazense's capabilities with your own tools and services:
+
+1. Go to Settings > Agent > MCPs
+2. Click "Add Custom MCP"
+3. Configure your MCP connection details directly in the mcp.json file
+4. The agent will have access to your custom MCP tools
+
+## Permissions
+
+You can configure how the agent handles permissions for different actions in Settings > Agent > Chat:
+
+* Query Execution: Choose to always allow, always ask, or use auto-run settings
+* Command Execution: Control whether the agent asks before running terminal commands
+* Data Sharing: Set default behavior for sharing query results with the LLM (always share, always ask, or use lock toggle)
+
+These settings give you fine-grained control over agent behavior while maintaining security for sensitive operations.

@@ -1,0 +1,64 @@
+---
+title: Semantic Layer
+description: Define governed metrics and dimensions in YAML for consistent answers.
+---
+
+The semantic layer lets you define metrics, dimensions, and joins once so Dazense answers consistently and transparently.
+
+## Create a semantic model
+
+Create `semantics/semantic_model.yml`:
+
+```yaml
+models:
+  customers:
+    table: customers
+    schema: main
+    description: Customer master data
+    primary_key: customer_id
+    dimensions:
+      customer_id:
+        column: customer_id
+      first_name:
+        column: first_name
+      last_name:
+        column: last_name
+    measures:
+      customer_count:
+        type: count
+
+  orders:
+    table: orders
+    schema: main
+    description: All orders placed by customers
+    primary_key: order_id
+    time_dimension: order_date
+    dimensions:
+      status:
+        column: status
+    measures:
+      order_count:
+        type: count
+      total_revenue:
+        column: amount
+        type: sum
+      avg_order_value:
+        column: amount
+        type: avg
+    joins:
+      customer:
+        to_model: customers
+        foreign_key: customer_id
+        related_key: customer_id
+        type: many_to_one
+```
+
+## Measure types
+
+- `count`, `sum`, `avg`, `min`, `max`, `count_distinct`
+
+## Join types
+
+- `many_to_one`, `one_to_one`, `one_to_many`
+
+When a semantic model is present, the agent uses `query_metrics` for covered questions to avoid ad‑hoc SQL and keep logic governed.

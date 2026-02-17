@@ -1,0 +1,138 @@
+---
+title: Quickstart
+description: This command will ask you:
+---
+
+> Deploy your first analytics agent in 1 minute
+
+## Step 1: Install dazense-core package
+
+```bash
+pip install dazense-core
+```
+
+## Step 2: Initialize a dazense project
+
+```bash
+dazense init
+```
+
+This command will ask you:
+
+* To name your project
+* If you want to connect a database *(optional)*
+* If you want to add a repo in agent context *(optional)*
+* To add an LLM key *(optional)*
+* If you want to setup a Slack connection *(optional)*
+
+<Info>
+You can skip any optional question and configure them later in your `dazense_config.yaml` file.
+</Info>
+
+This will create:
+
+* A new folder with your project name
+* An architecture for your context files
+* A `dazense_config.yaml` configuration file
+* A `RULES.md` file
+
+## Step 3: Verify your setup
+
+cd to the project folder and run:
+
+```bash
+dazense debug
+```
+
+This command checks your configuration and displays any issues.
+
+## Step 4: Synchronize your context
+
+```bash
+dazense sync
+```
+
+This will populate your context folder with your context files (data, metadata, repos, etc.).
+
+## Step 5: Launch the chat and ask questions
+
+You have two options to access the chat UI:
+
+### Option 1: Using dazense chat command
+
+```bash
+dazense chat
+```
+
+This will start the dazense chat UI. It will open the chat interface in your browser at `http://localhost:5005`.
+
+### Option 2: Using Docker
+
+Instead of `dazense chat`, you can use Docker to run the UI:
+
+**With built-in example:**
+
+```bash
+docker run -d \
+  --name dazense \
+  -p 5005:5005 \
+  -e BETTER_AUTH_URL=http://localhost:5005 \
+  -e FASTAPI_URL=http://127.0.0.1:8005 \
+  dazense/dazense:latest
+```
+
+**With your project:**
+
+```bash
+docker run -d \
+  --name dazense \
+  -p 5005:5005 \
+  -e BETTER_AUTH_URL=http://localhost:5005 \
+  -e FASTAPI_URL=http://127.0.0.1:8005 \
+  -v /path/to/your/project:/app/project \
+  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/project \
+  dazense/dazense:latest
+```
+
+Access the UI at `http://localhost:5005` and add your LLM API key in the settings.
+
+From there, you can start asking questions to your agent!
+
+## Step 6: Evaluate your agent
+
+First, create a folder tests/ with questions and expected SQL in yaml.
+Then, mesure agent's performance on examples with dazense test command:
+
+```bash
+dazense test
+```
+
+View results in tests panel:
+
+```bash
+dazense test server
+```
+
+<Card title="Evaluation Guide" icon="flask" href="/dazense-agent/context-engineering/evaluation">
+Learn how to build comprehensive test suites and evaluate your agent
+</Card>
+
+## What's Next?
+
+<CardGroup cols={2}>
+<Card title="Context Builder" icon="cube" href="/dazense-agent/context-builder/overview">
+Learn how to build and customize your agent's context
+</Card>
+
+<Card title="Self-Hosting" icon="server" href="/dazense-agent/self-hosting/deployment-guide">
+Deploy your agent in production
+</Card>
+
+<Card title="Chat Interface" icon="comments" href="/dazense-agent/chat/overview">
+Explore the chat interface features
+</Card>
+
+<Card title="dazense Cloud" icon="cloud" href="/dazense-agent/cloud/overview">
+Use our managed cloud service
+</Card>
+</CardGroup>

@@ -1,0 +1,43 @@
+---
+title: Indexing Documentation
+description: dazense indexes your codebase to provide fast, relevant answers and code suggestions, with the context of your existing repository and data schema.
+---
+
+## Overview
+
+dazense indexes your codebase to provide fast, relevant answers and code suggestions, with the context of your existing repository and data schema.
+
+## Benefits for dazense Agent
+
+The indexing process provides three key advantages:
+
+- Full repository context including structure and code style
+- Precise data schema context ensuring generated code matches your data
+- Ability to answer questions about your codebase or data warehouse
+
+## Indexed Content
+
+The system indexes:
+
+- All files in your repository (excluding those in `.gitignore` or `.naoignore`)
+- All table schemas in your data warehouse
+
+## Automatic Indexing
+
+**If auto-indexing is enabled:**
+- Indexing launches automatically when opening a new folder or data connection (takes several minutes)
+- Re-indexing triggers automatically every 10 minutes
+
+**If auto-indexing is disabled:**
+- Manually trigger indexing from the settings/AI models panel
+- Re-activate auto-indexing from this same panel
+
+## Checking Status
+
+Monitor both codebase and warehouse indexing status in the **settings/AI models panel**.
+
+## Privacy & Security
+
+The system stores only "embeddings—the indexing output—on dazense servers." Your actual codebase, data schema, and data content remain completely inaccessible and unindexed locally.
+
+For additional details, consult the [Privacy Policy](https://dazense.metazense.com/security/privacy-policy/).

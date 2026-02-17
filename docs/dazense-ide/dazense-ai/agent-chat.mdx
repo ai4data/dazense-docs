@@ -1,0 +1,79 @@
+---
+title: Chat
+description: dazense agent is your AI-powered assistant with access to both your codebase repository and your data connection metadata.
+---
+
+dazense agent is your **AI-powered assistant** with access to both your codebase repository and your data connection metadata.
+
+dazense agent can access and search your **codebase and your data warehouse metadata**.
+It can execute queries on your warehouse, run commands for you, and integrate with your data stack through MCPs.
+
+A typical agent flow is:
+
+* A [prompt](#prompting) you send to the agent
+* Enriched with [context](/dazense-ide/dazense-ai/agent-context) & [indexing](/dazense-ide/dazense-ai/indexing) of your codebase and data schema
+* A specific [agent mode](#agent-mode)
+* A [foundational model](/dazense-ide/dazense-ai/agent-models)
+* Your own [rules](/dazense-ide/dazense-ai/agent-rules)
+* [Tools](/dazense-ide/dazense-ai/agent-tools) executed by the agent
+
+## Prompting
+
+**Smart prompt suggestions**
+
+As you type in the chat, dazense will suggest relevant prompts based on:
+
+* Your current context (open files, selected tables, etc.)
+* Common workflows and use cases
+* Your project structure and data schema
+
+For more prompt templates, check out our [prompt library](/dazense-ide/learn/prompt-library).
+
+## Agent modes
+
+There are 3 different agent modes: **Chat**, **Edit**, **Plan**.
+
+You can switch modes directly within the agent prompt form, at any point of a conversation.
+
+### Chat
+
+In Chat mode, the agent will answer questions and suggest code changes.
+You can then:
+
+* **Apply changes**: Click "Apply" button to see the suggested changes directly applied in your files
+* **Accept/reject changes**: Accept or reject each bit of code or all of the code suggested.
+
+### Edit
+
+In Edit mode, the agent will **auto-apply** suggestions. You can always review the changes and decide whether to accept or reject them.
+
+**Edit mode requires an open folder**
+The agent can only edit files in open folder and cannot create new files outside of an open workspace.
+
+### Plan
+
+In Plan mode, the agent will first write a plan to answer your request. This mode is mostly useful for long-tasks that require thoughtful planning.
+In this mode, the agent won't apply any changes - you can switch to edit mode for the agent to execute the drafted plan.
+
+**Shortcuts to accept / reject / undo apply changes:**
+
+* Accept changes: <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>⏎</kbd>
+* Reject changes: <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>⌫</kbd>
+* Undo accept: <kbd>⌘</kbd> + <kbd>Z</kbd>
+
+## Multiple chats
+
+You can run **multiple chats** at the same time within dazense.
+
+They will keep **running in parallel**, even if you switch between multiple chats. You will see a chat is running with a blue dot on it - when it goes away it means the chat has finished its task.
+
+Once you have created multiple chats, you will be able to **rename** them by double clicking it, and **reorder** chat tabs. Every tab will also show you the active changes in the specific chat.
+
+## Chat History
+
+All your chat conversations are saved within dazense.
+
+Each conversation is linked to one folder / repository and can only be retrieved from there.
+You can access previous conversations to view them, and continue them from where you left off.
+
+All your chat history is accessible from the history icon on top right of your chat.

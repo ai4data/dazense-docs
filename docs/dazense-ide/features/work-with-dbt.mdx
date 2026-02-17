@@ -1,0 +1,45 @@
+---
+title: Work with dbt
+description: To maximize dbt usage within dazense, configure your dbt settings in the platform. Refer to the Set up dbt(../get-started/set-up-dbt) page for detailed instr...
+---
+
+## Setup dbt
+
+To maximize dbt usage within dazense, configure your dbt settings in the platform. Refer to the [Set up dbt](../get-started/set-up-dbt) page for detailed instructions.
+
+## Preview, run, build dbt models
+
+dbt models can be previewed directly in dazense once your dbt configuration and data connection are established. Execute models by clicking the **execute SQL** button in the top bar or using <kbd>⌘</kbd> + <kbd>⏎</kbd>.
+
+When executing a dbt model, a dedicated tab displays the compiled SQL that dazense uses for execution.
+
+The toolbar includes a dropdown menu for running, building, and testing dbt models along with their dependencies.
+
+## Run dbt tests
+
+Models with defined tests can be executed from the preview panel. In **Database** mode, tests run against the materialized model. In **Code** mode, tests execute on the current code preview.
+
+## View dbt lineage
+
+Access the dbt lineage visualization from the top right icon. The view adjusts based on context—showing a focused 1+model+1 view when a dbt file is open, or displaying the complete lineage otherwise.
+
+Within the lineage interface, you can expand nodes to view deeper dependencies, use the selection form to isolate specific sections, and click nodes to open corresponding model files.
+
+## Navigate dbt dependencies
+
+The top toolbar displays upstream and downstream dependencies for open dbt model files. Hovering over dependency indicators reveals full lists for navigation.
+
+Keyboard navigation is supported:
+* <kbd>⌘</kbd> + click on ref names opens the corresponding file
+* <kbd>⌘</kbd> + click on CTE names jumps to their definitions
+* <kbd>⌘</kbd> + click on columns navigates to previous definitions
+
+## Auto-complete on dbt models
+
+The editor suggests shortcuts for adding sources and refs, displaying available options from your dbt repository. When selecting columns from sources or refs, dazense extracts and suggests the available column list for that specific resource.
+
+AI auto-completion incorporates your dbt model schemas, enabling contextually relevant SQL suggestions based on your underlying models.
+
+## Agent dbt tools
+
+dazense agent provides specialized dbt tools including model creation, source definition, documentation and testing generation, dependency retrieval, and command execution. See [agent tools](/dazense-ide/dazense-ai/agent-tools) for the complete tool inventory.

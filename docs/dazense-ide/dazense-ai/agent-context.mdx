@@ -1,0 +1,22 @@
+---
+title: Context
+description: The agent automatically accesses your codebase info and data warehouse metadata (list of tables and their schema). Users can supplement this with files, data...
+---
+
+## Default Context
+
+The agent automatically accesses your codebase info and data warehouse metadata (list of tables and their schema). Users can supplement this with files, data warehouse tables, and SQL worksheets.
+
+## Context Addition Methods
+
+**Context Picker**: Users click "Add context" to browse and select files, folders, SQL worksheets, data warehouse tables, or entire database schemas. When tables are added, only their schema (column names and types) is shared—actual data remains private.
+
+**Automatic Addition**: The system intelligently includes the most recently viewed table, previewed table schemas, and open files in conversations.
+
+**Drag and Drop**: Items can be dragged directly into the chat for quick context integration.
+
+**Cmd+L Shortcut**: Users can select code lines and press Cmd+L to add them as context, or use this method to send query results directly to the agent for analysis and visualization.
+
+## Infinite Chat
+
+The platform supports unlimited conversation length without token restrictions, allowing extended multi-step workflows. However, when conversations approach the model's context window limit, dazense displays a warning suggesting users start fresh conversations to maintain optimal performance.

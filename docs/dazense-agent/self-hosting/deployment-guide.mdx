@@ -1,0 +1,181 @@
+---
+title: Deployment Guide
+description: Deploy dazense with Docker on your own cloud infrastructure
+---
+
+Deploy dazense with Docker on your own cloud infrastructure
+
+This is a 5 steps guide to create a dazense context project, and deploy dazense chat UI in your own infrastructure.
+
+## Step 1: Create your dazense context repository
+
+**1. Create a new folder / repository and initialize a dazense project**
+
+```bash
+dazense init
+```
+
+Run a first dazense sync if you want to start populating content in your repo:
+
+```bash
+dazense init
+```
+
+**2. In `dazense_config.yaml`, replace your secrets by environment variables**
+
+Instead of hard-coding credentials (service account keys, API tokens, database passwords) in your config file, reference them via environment variables. This keeps sensitive values out of Git, makes it easier to rotate keys, and lets you reuse the same config across local, staging, and production.
+
+Example:
+
+```yaml
+databases:
+  - name: bigquery-prod
+    accessors:
+      - columns
+      - preview
+      - description
+    include: []
+    exclude: []
+    type: bigquery
+    project_id: dazense-production
+    dataset_id: prod_silver
+    credentials_json: {{ env('GCP_SERVICE_ACCOUNT_KEY_JSON') }}
+    location: EU
+```
+
+You'll later provide `GCP_SERVICE_ACCOUNT_KEY_JSON` via your deployment platform (for example, as a Secret in Google Secret Manager wired to an env var in Cloud Run).
+
+**3. Init a git repository from your context folder**
+
+Versioning your dazense project in Git lets you review changes to context, roll back safely, and collaborate with your team using pull requests. It also allows your deployed dazense chat to directly sync with the contet in your GitHub repository.
+
+```bash
+git init
+git add .
+git commit -m "Initial dazense project"
+```
+
+## Step 2: Create Dockerfile
+
+Create a `Dockerfile` in your repository, using the official [`dazense/dazense` image](https://hub.docker.com/r/dazense/dazense) as the base:
+
+```dockerfile
+FROM dazense/dazense:latest
+
+# Copy your project files
+COPY . /app/project/
+
+# Set working directory
+WORKDIR /app/project
+```
+
+Create a `.dockerignore`:
+
+```text
+.env
+venv/
+.gitignore
+.DS_Store
+```
+
+Commit and push the created files.
+
+## Step 3: Create a PostgreSQL database
+
+1. Create a PostgreSQL instance - here I'm using Cloud SQL.
+2. Allow unencrypted network traffic (or configure SSL).
+3. Enable **Private API** connections.
+4. Note your connection string / instance connection name.
+
+## Step 4: Deploy dazense on your cloud infrastructure
+
+In this guide we'll use **Google Cloud Run** as a concrete example, but the same pattern applies to other container platforms (ECS, Kubernetes, etc.). You'll build a Docker image from your dazense project and deploy it to Cloud Run, connect it to a managed PostgreSQL instance (Cloud SQL), and load secrets via Google Secret Manager.
+
+### 4.1 Configure Environment Variables
+
+Create secrets in Google Secret Manager for all sensitive values:
+
+* `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`
+* `GCP_SERVICE_ACCOUNT_KEY_JSON` (full JSON content of the BigQuery service account, or other warehouse provider secrets)
+* `DB_URI` with your PostgreSQL URI - used for storing your app DB. For example:
+
+```text
+postgres://[user_name]:[password]@[host]:[port]/[database]
+```
+
+* Any other secrets used in `dazense_config.yaml` (e.g. Notion key)
+
+### 4.2 Configure Cloud Run service
+
+1. Create a new Cloud Run service.
+
+2. Use your GitHub repository as the source and set up Cloud Build to build the Dockerfile.
+
+3. In the service configuration, add these configurations:
+
+**Container:**
+Container port: `5005`
+
+**Environment variables:**
+
+```bash
+DAZENSE_DEFAULT_PROJECT_PATH=/app/project
+FASTAPI_URL=http://127.0.0.1:8005
+BETTER_AUTH_URL=https://placeholder.run.app   # will be updated after first deploy
+```
+
+**Secrets (from Secret Manager):**
+
+* `OPENAI_API_KEY` / `ANTHROPIC_API_KEY`
+* `GCP_SERVICE_ACCOUNT_KEY_JSON`
+* `DB_URI`
+
+**Connections:**
+
+* Add Cloud SQL connection to your PostgreSQL instance.
+
+**Networking:**
+
+* Activate "Connect to VPC for outbound traffic" / "Send traffic directly to a VPC"
+
+4. Deploy the service.
+
+5. Once the service is live, copy the Cloud Run URL and update:
+
+```bash
+BETTER_AUTH_URL=https://your-cloud-run-url.run.app
+```
+
+6. Open this URL in your browser, confirm that the dazense chat UI loads, and complete the first sign-up flow. At this stage, only the very first user can sign up directly; additional users are added and authorized later via the admin setup and user management flows.
+
+7. Map a custom domain (optional)
+
+If you prefer a friendly URL instead of the default Cloud Run URL:
+
+1. In Cloud Run, go to **Domain mappings**.
+2. Verify your domain.
+3. Add the subdomain you want to use (e.g. `sky.naolabs.io`).
+4. Add the required DNS records at your DNS provider.
+5. Update `BETTER_AUTH_URL` to the custom domain, for example:
+
+```bash
+BETTER_AUTH_URL=https://sky.naolabs.io
+```
+
+## Step 5: Customize your setup
+
+### 5.1 Add users to your app
+
+Once your chat UI is deployed, invite teammates and manage access from the admin interface.
+
+### 5.2 Automate dazense sync with GitHub Actions
+
+Automate `dazense sync` so your context stays up to date in Git.
+
+### 5.3 Connect a Slack bot
+
+Expose your analytics agent directly in Slack so teams can ask questions where they work.
+
+### 5.4 Enable Google OAuth for user sign-in
+
+To allow users to sign in with Google and control which domains can self-register.

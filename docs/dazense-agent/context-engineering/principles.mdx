@@ -1,0 +1,64 @@
+---
+title: Context Engineering Principles
+description: Optimize your analytics agent's context for reliability, speed, and cost.
+---
+
+Optimize your analytics agent's context for reliability, speed, and cost.
+
+## The Three Dimensions
+
+When building context for your analytics agent, you need to balance three interconnected performance dimensions:
+
+* **Reliability** — Answer rate and accuracy. Can the agent answer questions correctly?
+* **Speed** — Response time. How fast does the agent respond?
+* **Costs** — Token consumption and query execution costs.
+
+## The Approach
+
+Context engineering follows the same methodology as data engineering:
+
+1. **Measure** — Track accuracy, response times, and token usage across real-world usage patterns
+2. **Iterate** — Identify failure patterns and refine context accordingly
+3. **Optimize** — Find the right balance between sufficient context and efficiency
+
+## Four Concrete Rules
+
+### Rule 1: MECE (Mutually Exclusive, Collectively Exhaustive)
+
+Your context must be:
+
+* **Collectively Exhaustive** — Cover all possible user queries. If a user can ask about it, the context should support it.
+* **Mutually Exclusive** — Each metric has one and only one definition. No conflicting or duplicate information.
+
+This prevents incomplete answers and conflicting information.
+
+### Rule 2: Balance Token Costs
+
+Include only relevant schemas, tables, and documentation while eliminating redundancy. This controls costs without sacrificing quality.
+
+* Remove unused tables and schemas
+* Eliminate duplicate definitions
+* Keep context focused on what matters
+
+### Rule 3: Minimize Exploration
+
+Provide sufficient upfront documentation to prevent exploratory queries:
+
+* Include explicit relationship documentation between tables
+* Provide example query patterns
+* Document JOIN paths and common aggregations
+* Give the agent enough context so it doesn't need to run discovery queries
+
+### Rule 4: Modularity
+
+Organize context into domain-based logical units:
+
+* Structure content by business domain (marketing, finance, product, etc.)
+* Use hierarchical organization
+* Allow agents to access focused information pieces rather than processing everything simultaneously
+* Load only relevant context for each query
+
+## Next Steps
+
+* **Context Engineering Playbook** — Step-by-step implementation guide
+* **Evaluation** — How to test and measure your agent's performance

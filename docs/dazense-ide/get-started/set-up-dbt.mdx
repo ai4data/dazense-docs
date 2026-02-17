@@ -1,0 +1,35 @@
+---
+title: dbt setup
+description: dazense offers direct integration with dbt, enabling users to preview models, access lineage information, and provide dbt tools to the AI assistant. Addition...
+---
+
+dazense offers direct integration with dbt, enabling users to preview models, access lineage information, and provide dbt tools to the AI assistant. Additional details about dazense and dbt capabilities are available in the [Work with dbt](/dazense-ide/features/work-with-dbt) section.
+
+## Accessing dbt Configuration
+
+The "dbt configuration" panel can be opened from the home page or the left side of the bottom bar.
+
+## dbt Configuration Panel Steps
+
+1. **Enable dbt**: Activate dbt detection within the interface.
+
+2. **Pick a Python interpreter**: Select an existing interpreter/virtual environment or establish a new one for your project.
+
+3. **Install packages**: Choose your dbt-core version and install necessary warehouse adapters (such as Snowflake or BigQuery).
+
+4. **Point to project files**: Specify folders containing `dbt_project.yml` and `profiles.yml`. dazense attempts automatic discovery.
+
+5. **Add environment variables (optional)**: Include secrets or configuration values directly, or reference `.dazense.env` / `.env` files. Existing `.env` values load automatically.
+
+6. **Select the target**: Choose your dbt target from `profiles.yml` (examples: `dev`, `prod`). This selection can be modified later via the bottom left bar.
+
+7. **Enable dbt defer (optional)**: Activate the defer toggle and provide your production `manifest.json`. When editing models, enable **Defer mode** to use production data when development data is unavailable. See the [dbt documentation](https://docs.getdbt.com/reference/node-selection/defer) for additional information.
+
+## Verification
+
+A checkmark in the lower-left status bar indicates successful dbt configuration. Should an error symbol appear instead, click the dbt project button to reopen setup and address any incomplete steps.
+
+## Requirements
+
+- **dbt Core only**: dazense supports dbt Core projects exclusively; dbt Cloud users must run a local Core installation.
+- **Local environment**: The dbt project must reside on the same machine running dazense; remote environments are unsupported.

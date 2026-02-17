@@ -1,0 +1,181 @@
+---
+title: Synchronization
+description: Sync and update your agent's context
+---
+
+Sync and update your agent's context
+
+## dazense sync
+
+The `dazense sync` command populates your context folder with content from configured sources.
+
+```bash
+dazense sync
+```
+
+**What Gets Synced**
+
+When you run `dazense sync`, the following happens:
+
+**1. Database Schemas**
+
+For each database in your `dazense_config.yaml`:
+
+* **Connect** to the database
+* **Extract schema information** (tables, columns, data types)
+* **Generate context files** in `databases/` folder
+* **Create structured files** for each table:
+  * `columns.md` - Column definitions and types
+  * `description.md` - Table description (if available)
+  * `preview.md` - Sample data preview
+  * `profiling.md` - Data profiling information
+
+Example structure after sync:
+
+```
+databases/
+└── type=snowflake/database=analytics/
+    ├── table=customers/
+    │   ├── columns.md
+    │   ├── description.md
+    │   ├── preview.md
+    │   └── profiling.md
+    └── table=orders/
+        ├── columns.md
+        ├── description.md
+        ├── preview.md
+        └── profiling.md
+```
+
+**2. Repositories**
+
+For each repository in your configuration:
+
+* **Clone or pull** the latest code
+* **Extract relevant files** from specified paths
+* **Index content** for the agent
+* **Store** in `docs/` folder
+
+**3. Indexing**
+
+After syncing:
+
+* **Content is indexed** for fast semantic search
+* **Embeddings are created** for relevant context retrieval
+* **Agent can access** all synced information
+
+## Scheduling
+
+### GitHub Actions
+
+Set up automated syncing with GitHub Actions to keep your context up to date.
+
+**1. Create Workflow File**
+
+This workflow will regularly run `dazense sync` on GitHub's servers, commit any changes to your context files (like updated database schemas or docs), and push them back to your repository so your context stays in sync without manual commands.
+
+Create `.github/workflows/nao_sync.yml` in your repository:
+
+```yaml
+name: Dazense Sync
+
+on:
+  schedule:
+    - cron: "0 0 */2 * *"  # every 2 days at 00:00 UTC
+  workflow_dispatch:  # allows manual triggering
+
+jobs:
+  dazense-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # needed to commit changes
+
+    env:
+      DAZENSE_DEFAULT_PROJECT_PATH: ./dazense_config.yaml
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dazense CLI
+        run: |
+          pip install --upgrade pip
+          pip install dazense-core
+
+      - name: Run dazense sync
+        env:
+          GCP_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY_JSON }}
+          # Add other secrets as needed (e.g., NOTION_API_KEY, etc.)
+        run: dazense sync
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit and push changes
+        run: |
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "dazense sync update"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+```
+
+**2. Configure Repository Secrets**
+
+In your GitHub repository:
+
+1. Go to **Settings** > **Secrets and variables** > **Actions**
+2. Click **"New repository secret"**
+3. Add secrets for all environment variables used in your `dazense_config.yaml`:
+   * `GCP_SERVICE_ACCOUNT_KEY_JSON` - Full JSON content of your BigQuery service account
+   * `NOTION_API_KEY` - If using Notion integration
+   * Any other credentials referenced in your config
+
+> **Warning**: Never commit secrets directly in your workflow file. Always use GitHub Secrets.
+
+**3. Customize Schedule**
+
+Adjust the cron schedule to match your needs:
+
+```yaml
+on:
+  schedule:
+    - cron: "0 0 * * *"      # Daily at midnight UTC
+    - cron: "0 0 */2 * *"    # Every 2 days
+    - cron: "0 0 * * 1"      # Weekly on Monday
+    - cron: "0 3 * * *"      # Daily at 3 AM UTC
+```
+
+**4. Manual Trigger**
+
+You can manually trigger the sync:
+
+* Go to **Actions** tab in your repository
+* Select **"Dazense Sync"** workflow
+* Click **"Run workflow"**
+
+**5. Monitor Sync Results**
+
+* Check the **Actions** tab to see sync history
+* Review logs if sync fails
+* Verify changes are committed to your repository
+
+> **Info**: The workflow automatically commits and pushes any changes from `dazense sync` back to your repository, keeping your context files up to date.
+
+**Next Steps**
+
+- **Context Providers** - Learn about configuring databases and repos
+- **Context Engineering Playbook** - Learn how to measure, iterate, and optimize your context
+- **Start Chatting** - Use your synced context with the agent
+- **Context Principles** - Understand core principles for effective context engineering

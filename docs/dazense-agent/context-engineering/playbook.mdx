@@ -1,0 +1,106 @@
+---
+title: Playbook
+description: This playbook provides a systematic approach to building and maintaining effective context for your analytics agent. Follow these steps in order to ensure a ...
+---
+
+> Step-by-step guide to start context engineering for your analytics agent
+
+## Getting Started with Context Engineering
+
+This playbook provides a systematic approach to building and maintaining effective context for your analytics agent. Follow these steps in order to ensure a solid foundation and scalable growth.
+
+## First POC on small, reliable context
+
+**Step 1: Add Your Data Context**
+
+Start with a **restricted perimeter** of your data warehouse:
+
+* **Maximum 20 tables** to begin with
+* Focus on **clean, gold, or mart layer** tables (avoid raw staging tables)
+* Choose tables that represent core business domains
+
+> **Tip:** Starting small helps you validate your approach before scaling. You can always add more tables later.
+
+**Step 2: Add Your Documentation Repository**
+
+Include your documentation sources in context:
+
+* **dbt documentation** (schema.yml, docs blocks)
+* **Semantic layer** definitions
+* Any other relevant documentation repositories
+
+This helps the agent understand business logic, relationships, and data lineage.
+
+**Step 3: Add Company and Domain Rules**
+
+Create rules that provide context on:
+
+* **Your company** - business context, terminology, conventions
+* **Different domains** covered by your 20 tables - e.g., sales, marketing, finance, operations
+
+These high-level rules set the foundation for domain-specific understanding.
+
+**Step 4: Add Sub-Rules for Each Sub-Domain**
+
+For each sub-domain covered, create detailed sub-rules that include:
+
+* **Business definitions** - what key terms mean in your organization
+* **Metrics definitions** - how metrics are calculated and used
+* **List of tables** - which tables belong to this domain
+* **Relevant docs yaml** - specific documentation for this domain
+
+This modular approach makes your context easier to maintain and scale.
+
+## Measure, test and iterate
+
+**Step 5: Create a Set of 20 Key Questions**
+
+Develop a **test suite** of 20 key questions that represent:
+
+* Common user queries
+* Critical business questions
+* Edge cases
+* Different complexity levels
+
+These questions will serve as your quality benchmark throughout the process.
+
+**Step 6: Test and Iterate**
+
+Test the chat on your 20 questions:
+
+* Run all questions through the agent
+* Verify answers are correct and complete
+* Identify gaps in context or understanding
+* **Iterate on context** - add missing information, clarify ambiguities, refine rules
+
+Repeat until all 20 questions are answered correctly.
+
+**Step 7: Roll Out to Users**
+
+Once your test suite passes:
+
+* **Roll out** to a small group of users initially
+* **Track usage** - monitor what questions users are asking
+* **Monitor real-life performance** using logs of questions and feedback
+* Collect user feedback to identify improvement areas
+
+**Step 8: Version Control and Quality Assurance**
+
+Maintain context quality over time:
+
+* **Version your context** using git repositories
+* **Run `dazense test` frequently** (e.g., weekly or after major changes)
+* Ensure context quality doesn't drift as you make updates
+* Set up automated tests in CI/CD pipelines
+* Track test results over time to monitor performance trends
+
+## Scale
+
+**Step 9: Scale Gradually**
+
+As adoption grows:
+
+* **Extend the number of datasets** available in the agent
+* **Make documentation and rules modular** to support scalability
+* Add new domains incrementally, following the same process
+* Maintain the same quality standards as you expand

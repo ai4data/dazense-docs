@@ -1,0 +1,63 @@
+---
+title: Repositories
+description: This documentation explains how to integrate Git repositories into your agent context, enabling access to dbt projects, semantic layers, and internal documen...
+---
+
+## Overview
+
+This documentation explains how to integrate Git repositories into your agent context, enabling access to dbt projects, semantic layers, and internal documentation.
+
+## Purpose
+
+Adding repositories allows your agent to:
+
+* Access dbt model definitions and documentation
+* Access your semantic layer repository
+* Reference internal documentation
+
+## Setup Methods
+
+**Interactive Setup:**
+
+Run the initialization command to add repositories interactively:
+
+```bash
+dazense init
+```
+
+**Configuration File:**
+
+Add repositories to your `dazense_config.yaml`:
+
+```yaml
+repositories:
+  - name: dbt_project
+    url: https://github.com/your-org/dbt-project
+```
+
+## Synchronization
+
+**Sync Command:**
+
+```bash
+dazense sync
+```
+
+This process performs these steps:
+
+1. Clone or pull the repository
+2. Extract relevant files from the specified path
+3. Index the content for the agent
+4. Make it searchable
+
+**Storage Location:**
+
+After syncing, your repositories are stored in this structure:
+
+```
+context/
+└── repos/
+    └── dbt_project/
+```
+
+The output includes a full clone of your git repository in the repos/ folder.

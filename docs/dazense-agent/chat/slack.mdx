@@ -1,0 +1,133 @@
+---
+title: Slack Bot
+description: The dazense Slack bot brings your analytics agent directly into Slack, allowing your team to ask questions and get insights without leaving their workspace.
+---
+
+> Enable your team to ask questions directly in Slack
+
+The dazense Slack bot brings your analytics agent directly into Slack, allowing your team to ask questions and get insights without leaving their workspace.
+
+When configured, the dazense Slack bot:
+
+* Listens for mentions in Slack channels
+* Processes questions using the same agent as the web chat interface
+* Returns answers with SQL queries, data tables, and visualizations
+* Maintains conversation context within Slack threads
+
+> The Slack bot uses the same agent context, rules, and capabilities as your web chat interface. Any improvements to your agent automatically benefit Slack users.
+
+## Setup
+
+### Step 1: Create a Slack App
+
+1. Go to [https://api.slack.com/apps/](https://api.slack.com/apps/)
+2. Click **"Create New App"**
+3. Select **"From scratch"**
+4. Name your app (e.g., "dazense-chat")
+5. Select your workspace
+6. Click **"Create App"**
+
+### Step 2: Configure Bot Scope
+
+1. In your Slack app settings, go to **"OAuth & Permissions"**
+2. Scroll to **"Bot Token Scopes"**
+3. Add the following scopes:
+   * `app_mentions:read` - To receive mentions of your bot
+   * `chat:write` - To send messages to Slack
+
+### Step 3: Install App to Workspace
+
+1. Still in **"OAuth & Permissions"**, scroll to the top
+2. Click **"Install to Workspace"**
+3. Review permissions and click **"Allow"**
+
+### Step 4: Connect your Slack Bot to dazense Agent
+
+**Option 1: configuration within dazense UI**
+
+1. From **"OAuth & Permissions"** page, copy the **Bot User OAuth Token** (starts with `xoxb-`)
+2. In dazense UI, go to Settings / Project / Slack integration and paste the Bot Token
+3. In Slack interface, go to **"Basic Information"** in your app settings and copy the **Signing Secret**
+4. In dazense UI, paste the signing secret
+
+**Option 2: configuration with environment variables**
+
+1. From **"OAuth & Permissions"** page, copy the **Bot User OAuth Token** (starts with `xoxb-`)
+2. In Slack interface, go to **"Basic Information"** in your app settings and copy the **Signing Secret**
+3. Add these variables to your deployed container
+
+```bash
+SLACK_BOT_TOKEN=xoxb-your-bot-token-here
+SLACK_SIGNING_SECRET=your-signing-secret-here
+```
+
+### Step 5: Configure Event & Interactions Subscriptions
+
+1. In dazense UI, go to the Settings / Project / Slack integration
+   You will see 2 urls: Event Subscriptions -> Request URL and Interactivity & Shortcuts -> Request URL
+2. Go to **"Event Subscriptions"** in your app settings
+3. Enable **"Enable Events"**
+4. Set the **Request URL** to the Event Subscriptions -> Request URL from dazense UI
+   Example:
+   ```
+   https://your-deployed-instance-url/api/slack/events/{projectId}/app_mention
+   ```
+5. Under **"Subscribe to bot events"**, add:
+   * `app_mentions` - Listen for when users mention your bot
+6. Click **"Save Changes"**
+7. Go to **"Interactivity & Shortcuts"** in your app settings
+8. Enable **"Interactivity"**
+9. Set the **Request URL** to Interactivity & Shortcuts -> Request URL
+   Example:
+   ```
+   https://your-deployed-instance-url/api/slack/events/{projectId}/interactions
+   ```
+10. Click **"Save Changes"**
+
+### Step 6: Add Bot to Channels
+
+1. In Slack, go to any channel where you want the bot
+2. Type `/invite @dazense-chat` (or your bot's name)
+3. The bot will now listen for mentions in that channel
+
+## Usage
+
+**Ask Questions**
+
+Mention the bot in any channel where it's been added:
+
+```
+@dazense-chat What were our top 5 products by revenue last month?
+```
+
+The bot will:
+
+1. Process your question using the same agent as the web interface
+2. Generate SQL queries based on your context
+3. Execute queries against your connected databases
+4. Return results in a formatted Slack message
+5. Send you the link to the full conversation to open it in browser UI
+
+**Thread Conversations**
+
+Follow-up questions in the thread maintain context:
+
+```
+@dazense-chat What were our top 5 products by revenue last month?
+# ... bot responds ...
+
+@dazense-chat Can you break that down by region?
+# ... bot responds with regional breakdown ...
+```
+
+> The bot replies in threads to keep conversations organized. Make sure to reply in the thread for follow-up questions. You need to use @dazense-chat at every question, even in thread, for the bot to see it.
+
+**Stop Conversations**
+
+While generating, you will see a "stop generation" button appear in the slack conversation.
+Click on that button if you want to stop the chat from generating more text.
+
+## What's Next?
+
+* [Chat Overview](/dazense-agent/chat/overview) - Learn about the web chat interface
+* [Self-Hosting Guide](/dazense-agent/self-hosting/deployment-guide) - Deploy dazense with Docker or on your own Cloud Run instance

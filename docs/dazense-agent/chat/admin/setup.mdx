@@ -1,0 +1,151 @@
+---
+title: Setup
+description: As an admin, you can configure how your team accesses dazense chat, manage integrations, choose models, and customize agent behavior.
+---
+
+> Configure users, authentication, models, and prompts for dazense chat
+
+As an admin, you can configure how your team accesses dazense chat, manage integrations, choose models, and customize agent behavior.
+
+## Access the admin panel
+
+The admin views are exposed from the same server as the chat UI.
+
+1. Start dazense chat locally (see the [chat overview](/dazense-agent/chat/overview) for details).
+2. Sign in with an admin-capable account.
+3. Navigate to the admin section from the UI navigation.
+
+The admin panel includes sections for:
+
+* **Project** - General project settings and Google OAuth
+* **Models** - LLM provider configuration
+* **Agent** - Agent settings and template prompts
+* **MCP Servers** - Model Context Protocol server configuration
+* **Slack** - Slack bot integration
+* **Team** - User management
+
+## Add Users
+
+User management is available for deployed instances. If you're running dazense locally with `dazense chat`, user management is not required. For deployment instructions, see the [Deployment Guide](/dazense-agent/self-hosting/deployment-guide).
+
+**To add a new user to a project:**
+
+1. Navigate to **Team** in the left sidebar.
+2. Click the **+** button in the top right of the Users panel.
+3. Enter the user's email address
+4. The user will then have to sign in with its email address and the generated password.
+
+If you want to let users sign up autonomously, you can setup Google OAuth - see in next section.
+
+The first user to sign up after deployment automatically becomes an admin. Additional users must be added through the admin interface. For more details on deploying dazense, see the [Deployment Guide](/dazense-agent/self-hosting/deployment-guide#step-5-customize-your-setup).
+
+## Configure Google OAuth
+
+Google OAuth configuration is for deployed instances. This allows users to sign in with their Google accounts instead of manually created accounts. For deployment instructions, see the [Deployment Guide](/dazense-agent/self-hosting/deployment-guide#step-5-customize-your-setup).
+
+Enable Google sign-in for your team and control which domains can self-register.
+
+**Step 1: Create Google OAuth Credentials**
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Navigate to **APIs & Services** -> **Credentials**
+4. Click **Create Credentials** -> **OAuth client ID**
+5. Configure the OAuth consent screen if prompted
+6. Select **Web application** as the application type
+7. Add authorized redirect URIs:
+   ```
+   https://your-deployed-instance-url/api/auth/callback/google
+   ```
+8. Copy the **Client ID** and **Client Secret**
+
+**Step 2: Configure in dazense Admin Panel**
+
+1. Navigate to **Project** in the admin sidebar
+2. Scroll to the **Google Credentials** section
+3. Under **Google OAuth (Override Env)**, enter your **Client ID**
+4. Click the **ENV** button to manage environment variables if needed
+5. Set the following environment variables in your deployment:
+   ```bash
+   GOOGLE_CLIENT_ID=your-client-id-here
+   GOOGLE_CLIENT_SECRET=your-client-secret-here
+   ```
+
+**Step 3: Configure Allowed Domains**
+
+To restrict sign-up to specific email domains:
+
+1. Set the `GOOGLE_ALLOWED_DOMAINS` environment variable:
+   ```bash
+   GOOGLE_ALLOWED_DOMAINS=dazense.metazense.com,example.com
+   ```
+2. Only users with email addresses from these domains will be able to sign up
+
+> **Warning:** If you configure Google OAuth, users can sign in with their Google accounts. Make sure to set allowed domains if you want to restrict access to your organization.
+
+## Configure Slack integration
+
+Connect your dazense agent to Slack so your team can ask questions directly in Slack channels.
+
+Configure Slack integration from the **Slack** section in the admin sidebar, or see the [Slack Bot guide](/dazense-agent/chat/slack) for detailed setup instructions.
+
+## Choose LLM models
+
+Configure which LLM providers and models are available to your agent.
+
+**Configure API Keys**
+
+In the **Models** section of the admin panel:
+
+* **If no API key exists in your environment variables**: Enter your LLM API key directly in the UI
+* **If an API key exists in your environment variables**: You can override it by entering a different key in the UI
+
+Environment variables take precedence over UI configuration by default. Entering a key in the UI allows you to override the environment variable for that provider.
+
+**Select Available Models**
+
+Control which models your users can access by providing the model ID from your LLM provider:
+
+1. Navigate to **Models** in the admin sidebar
+2. Add or edit a provider (Anthropic, OpenAI, Google, Mistral, or OpenRouter)
+3. Enter the **model ID** for each model you want to make available
+4. Users will only be able to select from the models you've configured
+
+Model IDs are provider-specific. For example:
+
+* Anthropic: `claude-sonnet-4-5`, `claude-opus-4`, `claude-haiku-4`
+* OpenAI: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`
+* Google: `gemini-2.0-flash-exp`, `gemini-1.5-pro`, `gemini-1.5-flash`
+* Mistral: `mistral-large-latest`, `mistral-medium-latest`
+* OpenRouter: Various models from multiple providers
+
+**Supported LLM Providers**
+
+dazense supports the following LLM providers:
+
+* **Anthropic** - Claude models
+* **OpenAI** - GPT models
+* **Google** - Gemini models
+* **Mistral** - Mistral AI models
+* **OpenRouter** - Access to multiple models from various providers through a single API
+
+## Configure Template Prompts
+
+Customize prompt suggestions for your users in the chat.
+
+These prompts will be shown to your users in a new chat. These can be used to give your users examples of questions they can send to the chat.
+
+1. Navigate to **Agent** in the admin sidebar
+2. Look for **Template Prompts** section
+3. Add example prompts that users can click to get started, such as:
+   * "What were our top 5 products by revenue last month?"
+   * "Show me user signups by country for the past quarter"
+   * "Compare this month's sales to last month"
+   * "What's the average order value by customer segment?"
+
+These template prompts help users understand what types of questions they can ask and provide quick-start examples for common analytics queries.
+
+## What's Next?
+
+* [Admin Monitoring](/dazense-agent/chat/admin/monitoring) - Learn how to track usage, feedback, and costs
+* [Deployment Guide](/dazense-agent/self-hosting/deployment-guide) - Deploy dazense chat to production with step-by-step instructions

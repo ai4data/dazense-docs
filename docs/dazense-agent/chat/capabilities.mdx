@@ -1,0 +1,36 @@
+---
+title: Capabilities
+description: The dazense chat interface provides powerful built-in capabilities for natural language analytics.
+---
+
+The dazense chat interface provides powerful built-in capabilities for natural language analytics.
+
+## Key Features
+
+- **Natural Language Queries**: Ask questions in plain English and get instant answers
+- **Data Visualization**: Automatically generate charts and graphs from your data
+- **Transparent Reasoning**: See the SQL queries and logic behind each answer
+- **Conversation History**: Navigate through past queries and build on previous answers
+
+## How It Works
+
+The agent processes questions through five sequential steps:
+
+1. **Context Discovery** - Searches and reads context files to understand the data model, business definitions, and rules
+2. **Query Generation** - Writes optimized SQL queries based on the context
+3. **Execution** - Runs the query against connected databases
+4. **Visualization** - Creates charts when appropriate to display data
+5. **Response** - Summarizes findings in plain language with sources and reasoning
+
+## Agent Tools
+
+The dazense agent includes six autonomous tools:
+
+- **execute_sql** - Executes SQL queries against connected databases, supporting multiple connections and returning structured results
+- **display_chart** - Creates visualizations (bar, line, and pie charts) from query results with customizable styling
+- **search** - Searches for files matching glob patterns within project context
+- **list** - Lists files and directories at specified paths to help navigate project structure
+- **read** - Reads context files including SQL models, documentation, and business definitions
+- **grep** - Searches text patterns across context files using regex with filtering options
+
+The agent automatically orchestrates these tools based on your question without requiring manual tool specification.

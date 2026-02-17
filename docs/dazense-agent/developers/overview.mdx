@@ -1,0 +1,93 @@
+---
+title: Contributing to dazense
+description: Use this file to discover all available pages before exploring further.
+---
+
+Use this file to discover all available pages before exploring further.
+
+---
+
+Join the dazense open source community and help build the #1 analytics agent
+
+dazense is an open source project, and we welcome contributions from the community!
+
+## Get Involved
+
+- **Star the Repo** — Show your support by starring the repository at https://github.com/dazense/dazense
+- **Report Issues** — Found a bug? Open an issue and help us improve at https://github.com/dazense/dazense/issues
+- **Submit PRs** — Contribute code by submitting a pull request at https://github.com/dazense/dazense/pulls
+- **Join Discussions** — Share ideas and connect with other contributors at https://github.com/dazense/dazense/discussions
+
+## Development Setup
+
+To contribute to dazense, clone the repository and follow the setup instructions:
+
+```bash
+# Clone the repository
+git clone https://github.com/dazense/dazense.git
+cd dazense
+
+# Install dependencies
+npm install
+
+# Follow the development setup in CONTRIBUTING.md
+```
+
+For detailed development guidelines, commands, and contribution standards, see the CONTRIBUTING.md file.
+
+## Tech Stack
+
+dazense is built with modern technologies:
+
+### Backend
+
+| Technology | Purpose |
+|---|---|
+| Fastify | High-performance web framework |
+| Drizzle ORM | TypeScript ORM for database access |
+| tRPC | End-to-end typesafe APIs |
+
+### Frontend
+
+| Technology | Purpose |
+|---|---|
+| React | UI framework |
+| Tanstack Query | Data fetching and caching |
+| tRPC Client | Typesafe API client |
+| Shadcn UI | Component library |
+
+### CLI
+
+| Technology | Purpose |
+|---|---|
+| Python | CLI tooling and context builder |
+
+## Running with Docker
+
+```bash
+# Pull the image
+docker pull dazense/dazense:latest
+
+# Run the container
+docker run -d \
+  --name dazense \
+  -p 5005:5005 \
+  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/example \
+  -e OPENAI_API_KEY=sk-... \
+  dazense/dazense:latest
+```
+
+Access the UI at http://localhost:5005.
+
+## Join the Community
+
+- **Slack** — Connect with other dazense users and contributors
+- **GitHub** — Watch releases and follow development
+
+## Ways to Contribute
+
+- **Code contributions** — Fix bugs, add features, improve performance
+- **Documentation** — Improve docs, add examples, fix typos
+- **Bug reports** — Report issues you encounter with detailed reproduction steps
+- **Feature requests** — Suggest new features and improvements
+- **Community support** — Help answer questions in Slack and GitHub Discussions

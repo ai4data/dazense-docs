@@ -1,0 +1,91 @@
+---
+title: Git Repository
+description: Set up your dazense project as a Git repository for version control, collaboration, and deployment.
+---
+
+Set up your dazense project as a Git repository for version control, collaboration, and deployment.
+
+## Why Use Git?
+
+* **Version Control** — Track changes to your context files
+* **Collaboration** — Multiple team members can contribute
+* **Automated Sync** — Set up automated sync through GitHub Actions
+* **Deployment** — Easy integration with cloud deployments
+* **Backup** — Your context is safely stored in the cloud
+
+## Setup Steps
+
+### 1. Initialize Git
+
+Navigate to your dazense project directory and initialize Git:
+
+```bash
+cd my-analytics-agent
+git init
+```
+
+### 2. Create .gitignore
+
+Exclude sensitive files from version control:
+
+```
+.env
+credentials/
+venv/
+```
+
+### 3. Update Configuration
+
+Replace file paths with environment variables in `dazense_config.yaml`:
+
+```yaml
+databases:
+  - name: bigquery-prod
+    type: bigquery
+    project_id: my-project
+    dataset_id: analytics
+    credentials_json: {{ env('GCP_SERVICE_ACCOUNT_KEY_JSON') }}
+```
+
+### 4. Commit Files
+
+Stage and commit your project:
+
+```bash
+git add .
+git commit -m "Initial dazense project setup"
+```
+
+### 5. Create GitHub Repo
+
+Create a new repository on GitHub without initializing additional files (no README, no .gitignore, no license).
+
+### 6. Connect Remote
+
+Add the remote origin and push:
+
+```bash
+git remote add origin https://github.com/your-org/my-analytics-agent.git
+git push -u origin main
+```
+
+## Security
+
+> **Warning:** Never commit credentials or API keys to Git! Always use environment variables or secret management systems.
+
+* Use environment variables for local development
+* Use secret management systems for cloud deployments
+* Use GitHub Secrets for GitHub Actions
+
+## Deployment
+
+For Cloud Run deployment:
+
+* Connect your GitHub repository to Cloud Build
+* Use Secret Manager for credentials
+* Configure environment variables in Cloud Run settings
+
+**Next Steps**
+
+* Set up automated synchronization with GitHub Actions
+* Explore the Self-Hosting Guide for production deployment
