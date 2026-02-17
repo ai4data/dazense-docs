@@ -77,7 +77,7 @@ This workflow will regularly run `dazense sync` on GitHub's servers, commit any 
 Create `.github/workflows/nao_sync.yml` in your repository:
 
 ```yaml
-name: Dazense Sync
+name: dazense Sync
 
 on:
   schedule:
@@ -91,7 +91,7 @@ jobs:
       contents: write  # needed to commit changes
 
     env:
-      DAZENSE_DEFAULT_PROJECT_PATH: ./dazense_config.yaml
+      dazense_DEFAULT_PROJECT_PATH: ./dazense_config.yaml
 
     steps:
       - name: Checkout repository
@@ -104,7 +104,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Dazense CLI
+      - name: Install dazense CLI
         run: |
           pip install --upgrade pip
           pip install dazense-core
@@ -162,7 +162,7 @@ on:
 You can manually trigger the sync:
 
 * Go to **Actions** tab in your repository
-* Select **"Dazense Sync"** workflow
+* Select **"dazense Sync"** workflow
 * Click **"Run workflow"**
 
 **5. Monitor Sync Results**

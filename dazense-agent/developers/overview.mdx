@@ -72,7 +72,7 @@ docker pull dazense/dazense:latest
 docker run -d \
   --name dazense \
   -p 5005:5005 \
-  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/example \
+  -e dazense_DEFAULT_PROJECT_PATH=/app/example \
   -e OPENAI_API_KEY=sk-... \
   dazense/dazense:latest
 ```

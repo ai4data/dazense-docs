@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Dazense Docs",
+  "name": "dazense Docs",
   "colors": {
     "primary": "#8142FF",
     "light": "#AA80FF",
@@ -43,7 +43,7 @@
         ]
       },
       {
-        "tab": "Dazense Agent",
+        "tab": "dazense Agent",
         "groups": [
           {
             "group": "Get started",
@@ -106,7 +106,7 @@
         ]
       },
       {
-        "tab": "Dazense IDE",
+        "tab": "dazense IDE",
         "groups": [
           {
             "group": "Get started",
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "group": "Dazense AI",
+            "group": "dazense AI",
             "pages": [
               "dazense-ide/dazense-ai/agent-chat",
               "dazense-ide/dazense-ai/agent-context",
@@ -165,7 +165,11 @@
     ]
   },
   "fonts": {
-    "heading": "Urbanist",
-    "body": "Figtree"
+    "heading": {
+      "family": "Urbanist"
+    },
+    "body": {
+      "family": "Figtree"
+    }
   }
 }

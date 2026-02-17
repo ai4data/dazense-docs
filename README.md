@@ -1,6 +1,6 @@
 # dazense docs
 
-Mintlify documentation site for Dazense.
+Mintlify documentation site for dazense.
 
 Local structure:
 - `docs/` content pages
