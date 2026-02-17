@@ -9,6 +9,9 @@
 	--mz-text-muted: rgba(255, 255, 255, 0.85);
 	--mz-link: #e1d4ff;
 	--mz-link-hover: #ffffff;
+	--mz-link-on-light: #4f27b5;
+	--mz-text-on-light: #1f1c24;
+	--mz-text-muted-on-light: #4a4453;
 }
 
 html,
@@ -90,6 +93,39 @@ body {
 
 #content-area a:hover {
 	color: var(--mz-link-hover);
+}
+
+/* Improve readability on light cards/panels */
+#content-area [class*='card'],
+#content-area [class*='Card'],
+#content-area [class*='panel'],
+#content-area [class*='Panel'],
+#content-area [data-theme='light'] {
+	color: var(--mz-text-on-light) !important;
+}
+
+#content-area [class*='card'] *,
+#content-area [class*='Card'] *,
+#content-area [class*='panel'] *,
+#content-area [class*='Panel'] *,
+#content-area [data-theme='light'] * {
+	color: var(--mz-text-on-light) !important;
+}
+
+#content-area [class*='card'] a,
+#content-area [class*='Card'] a,
+#content-area [class*='panel'] a,
+#content-area [class*='Panel'] a,
+#content-area [data-theme='light'] a {
+	color: var(--mz-link-on-light) !important;
+}
+
+#content-area [class*='card'] p,
+#content-area [class*='Card'] p,
+#content-area [class*='panel'] p,
+#content-area [class*='Panel'] p,
+#content-area [data-theme='light'] p {
+	color: var(--mz-text-muted-on-light) !important;
 }
 
 button,
