@@ -3,15 +3,11 @@
 	--mz-white: #ffffff;
 	--mz-primary-purple: #8142ff;
 	--mz-purple-dark: #aa80ff;
-	--mz-primary-lime: #daff01;
 	--mz-text-strong: rgba(255, 255, 255, 0.96);
 	--mz-text: rgba(255, 255, 255, 0.92);
 	--mz-text-muted: rgba(255, 255, 255, 0.85);
 	--mz-link: #e1d4ff;
 	--mz-link-hover: #ffffff;
-	--mz-link-on-light: #4f27b5;
-	--mz-text-on-light: #1f1c24;
-	--mz-text-muted-on-light: #4a4453;
 }
 
 html,
@@ -33,44 +29,10 @@ body {
 	color: var(--mz-text);
 }
 
-#navbar a,
-#navbar span,
-#navbar button {
-	color: var(--mz-text);
-}
-
-#navbar a:hover,
-#navbar button:hover {
-	color: var(--mz-text-strong);
-}
-
 #sidebar {
 	background: #0f0f0f;
 	border-right: 1px solid rgba(255, 255, 255, 0.08);
 	color: var(--mz-text);
-}
-
-#sidebar * {
-	color: var(--mz-text) !important;
-}
-
-#sidebar a:hover,
-#sidebar button:hover {
-	color: var(--mz-text-strong) !important;
-}
-
-#sidebar a[aria-current='page'],
-#sidebar a[aria-selected='true'] {
-	color: var(--mz-white) !important;
-	background: rgba(129, 66, 255, 0.2);
-}
-
-#content-area {
-	color: var(--mz-text);
-}
-
-#content-area * {
-	color: inherit;
 }
 
 #content-area h1,
@@ -95,54 +57,8 @@ body {
 	color: var(--mz-link-hover);
 }
 
-/* Improve readability on light cards/panels */
-#content-area [class*='card'],
-#content-area [class*='Card'],
-#content-area [class*='panel'],
-#content-area [class*='Panel'],
-#content-area [data-theme='light'] {
-	color: var(--mz-text-on-light) !important;
-}
-
-#content-area [class*='card'] *,
-#content-area [class*='Card'] *,
-#content-area [class*='panel'] *,
-#content-area [class*='Panel'] *,
-#content-area [data-theme='light'] * {
-	color: var(--mz-text-on-light) !important;
-}
-
-#content-area [class*='card'] a,
-#content-area [class*='Card'] a,
-#content-area [class*='panel'] a,
-#content-area [class*='Panel'] a,
-#content-area [data-theme='light'] a {
-	color: var(--mz-link-on-light) !important;
-}
-
-#content-area [class*='card'] p,
-#content-area [class*='Card'] p,
-#content-area [class*='panel'] p,
-#content-area [class*='Panel'] p,
-#content-area [data-theme='light'] p {
-	color: var(--mz-text-muted-on-light) !important;
-}
-
-button,
-.btn,
-#navbar .button {
-	background: var(--mz-primary-purple);
-	color: var(--mz-white);
-	border-radius: 999px;
-}
-
 #content-area code,
 #content-area pre {
 	background: rgba(255, 255, 255, 0.05);
 	border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-#content-area blockquote {
-	border-left: 3px solid rgba(129, 66, 255, 0.5);
-	color: var(--mz-text-muted);
 }
