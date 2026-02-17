@@ -5,9 +5,9 @@
 	--mz-purple-dark: #aa80ff;
 	--mz-primary-lime: #daff01;
 	--mz-text-strong: rgba(255, 255, 255, 0.96);
-	--mz-text: rgba(255, 255, 255, 0.88);
-	--mz-text-muted: rgba(255, 255, 255, 0.7);
-	--mz-link: #cbb2ff;
+	--mz-text: rgba(255, 255, 255, 0.92);
+	--mz-text-muted: rgba(255, 255, 255, 0.85);
+	--mz-link: #e1d4ff;
 	--mz-link-hover: #ffffff;
 }
 
@@ -30,11 +30,14 @@ body {
 	color: var(--mz-text);
 }
 
-#navbar a {
+#navbar a,
+#navbar span,
+#navbar button {
 	color: var(--mz-text);
 }
 
-#navbar a:hover {
+#navbar a:hover,
+#navbar button:hover {
 	color: var(--mz-text-strong);
 }
 
@@ -44,32 +47,27 @@ body {
 	color: var(--mz-text);
 }
 
-#sidebar a,
-#sidebar button,
-#sidebar span {
-	color: var(--mz-text);
+#sidebar * {
+	color: var(--mz-text) !important;
 }
 
 #sidebar a:hover,
 #sidebar button:hover {
-	color: var(--mz-text-strong);
+	color: var(--mz-text-strong) !important;
 }
 
 #sidebar a[aria-current='page'],
 #sidebar a[aria-selected='true'] {
-	color: var(--mz-white);
+	color: var(--mz-white) !important;
 	background: rgba(129, 66, 255, 0.2);
-}
-
-#sidebar h4,
-#sidebar h5,
-#sidebar .group-title,
-#sidebar .section-title {
-	color: var(--mz-text-strong);
 }
 
 #content-area {
 	color: var(--mz-text);
+}
+
+#content-area * {
+	color: inherit;
 }
 
 #content-area h1,
