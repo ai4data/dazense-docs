@@ -1,4 +1,4 @@
-# Dazense Docs
+# dazense docs
 
 Mintlify documentation site for Dazense.
 
