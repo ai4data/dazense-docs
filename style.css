@@ -226,3 +226,325 @@
 .dark .navbar a:hover {
   color: #FFFFFF !important;
 }
+
+/* =============================================
+   MINTLIFY-SPECIFIC OVERRIDES
+   Critical fixes for Mintlify's Tailwind-based styling
+   ============================================= */
+
+/* Override all Tailwind gray text colors in dark mode */
+.dark .text-gray-300,
+.dark .text-gray-400,
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700,
+.dark .text-gray-800,
+.dark .text-gray-900 {
+  color: #E8E4F0 !important;
+}
+
+.dark .text-slate-300,
+.dark .text-slate-400,
+.dark .text-slate-500,
+.dark .text-slate-600,
+.dark .text-slate-700,
+.dark .text-slate-800 {
+  color: #E8E4F0 !important;
+}
+
+.dark .text-zinc-300,
+.dark .text-zinc-400,
+.dark .text-zinc-500,
+.dark .text-zinc-600,
+.dark .text-zinc-700,
+.dark .text-zinc-800 {
+  color: #E8E4F0 !important;
+}
+
+.dark .text-neutral-300,
+.dark .text-neutral-400,
+.dark .text-neutral-500,
+.dark .text-neutral-600,
+.dark .text-neutral-700,
+.dark .text-neutral-800 {
+  color: #E8E4F0 !important;
+}
+
+/* Prose content (main article text) */
+.dark .prose,
+.dark .prose p,
+.dark .prose li,
+.dark .prose td,
+.dark .prose th,
+.dark .prose span {
+  color: #E8E4F0 !important;
+}
+
+/* Headings in prose */
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #FFFFFF !important;
+}
+
+/* Step headers and all bold/semibold text - CRITICAL FIX */
+.dark .prose strong,
+.dark .prose b,
+.dark strong,
+.dark b,
+.dark [class*="font-semibold"],
+.dark [class*="font-bold"] {
+  color: #FFFFFF !important;
+}
+
+/* Ordered and unordered list markers */
+.dark .prose ol,
+.dark .prose ul {
+  color: #E8E4F0 !important;
+}
+
+.dark .prose ol > li::marker,
+.dark .prose ul > li::marker,
+.dark ol li::marker,
+.dark ul li::marker {
+  color: #C8C4D8 !important;
+}
+
+/* Provider names and key terms in lists (bold within li) */
+.dark .prose li strong,
+.dark .prose ul li strong,
+.dark .prose ol li strong {
+  color: #FFFFFF !important;
+}
+
+/* Inline code */
+.dark .prose code,
+.dark .prose-inline code,
+.dark :not(pre) > code {
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 4px !important;
+}
+
+/* Code blocks */
+.dark .prose pre,
+.dark pre[class*="language-"],
+.dark pre {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark .prose pre code {
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+
+/* Callouts (Note, Warning, Info, Tip, etc.) */
+.dark .callout,
+.dark [data-callout-type],
+.dark [class*="callout"] {
+  color: #E8E4F0 !important;
+}
+
+.dark .callout-content,
+.dark [data-component-part="callout-content"] {
+  color: #E8E4F0 !important;
+}
+
+/* Links */
+.dark .prose a,
+.dark .link,
+.dark a {
+  color: #D4C4FF !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+.dark .prose a:hover,
+.dark .link:hover,
+.dark a:hover {
+  color: #FFFFFF !important;
+}
+
+/* Mintlify eyebrow (section label above title) */
+.dark .eyebrow {
+  color: #A78BFA !important;
+  font-weight: 600 !important;
+}
+
+/* Page title */
+.dark .page-title,
+.dark #page-title,
+.dark h1 {
+  color: #FFFFFF !important;
+}
+
+/* Sidebar */
+.dark #sidebar,
+.dark #sidebar a,
+.dark #sidebar span,
+.dark #sidebar div,
+.dark #sidebar button,
+.dark #sidebar h2,
+.dark #sidebar h3,
+.dark #sidebar h4,
+.dark #sidebar h5,
+.dark #sidebar li,
+.dark #sidebar p,
+.dark .sidebar-group-header,
+.dark .sidebar-group-header h5,
+.dark [class*="sidebar"] {
+  color: #D8D4E4 !important;
+}
+
+.dark #sidebar a:hover,
+.dark #sidebar button:hover,
+.dark [class*="sidebar"]:hover {
+  color: #FFFFFF !important;
+}
+
+/* Active sidebar item */
+.dark #sidebar .active,
+.dark #sidebar .active a,
+.dark #sidebar .active span,
+.dark #sidebar [class*="bg-primary"],
+.dark #sidebar [class*="text-primary"] {
+  color: #FFFFFF !important;
+}
+
+/* Table of contents */
+.dark #table-of-contents,
+.dark #table-of-contents a,
+.dark #table-of-contents span,
+.dark #table-of-contents button,
+.dark [class*="toc"] a {
+  color: #C8C4D8 !important;
+}
+
+.dark #table-of-contents a:hover,
+.dark #table-of-contents button:hover,
+.dark [class*="toc"] a:hover {
+  color: #FFFFFF !important;
+}
+
+/* Pagination */
+.dark #pagination,
+.dark #pagination a,
+.dark #pagination span {
+  color: #E8E4F0 !important;
+}
+
+.dark #pagination a:hover {
+  color: #FFFFFF !important;
+}
+
+/* Footer */
+.dark footer,
+.dark footer a,
+.dark footer span {
+  color: #B8B4C8 !important;
+}
+
+.dark footer a:hover {
+  color: #E8E4F0 !important;
+}
+
+/* Tab panels */
+.dark [role="tab"],
+.dark [role="tablist"] button,
+.dark .tab,
+.dark .tabs button,
+.dark [class*="tab-"] button {
+  color: #D8D4E4 !important;
+}
+
+.dark [role="tab"][aria-selected="true"],
+.dark [role="tablist"] button[aria-selected="true"],
+.dark .tab[aria-selected="true"],
+.dark .tabs button[aria-selected="true"] {
+  color: #FFFFFF !important;
+}
+
+/* Syntax highlighting - ensure all tokens are visible */
+.dark .token.comment,
+.dark .token.prolog,
+.dark .token.doctype,
+.dark .token.cdata {
+  color: #9CA3AF !important;
+}
+
+.dark .token.punctuation {
+  color: #E5E7EB !important;
+}
+
+.dark .token.property,
+.dark .token.tag,
+.dark .token.boolean,
+.dark .token.number,
+.dark .token.constant,
+.dark .token.symbol {
+  color: #FCA5A5 !important;
+}
+
+.dark .token.selector,
+.dark .token.attr-name,
+.dark .token.string,
+.dark .token.char,
+.dark .token.builtin {
+  color: #86EFAC !important;
+}
+
+.dark .token.operator,
+.dark .token.entity,
+.dark .token.url,
+.dark .language-css .token.string,
+.dark .style .token.string {
+  color: #E5E7EB !important;
+}
+
+.dark .token.atrule,
+.dark .token.attr-value,
+.dark .token.keyword {
+  color: #F9A8D4 !important;
+}
+
+.dark .token.function,
+.dark .token.class-name {
+  color: #A78BFA !important;
+}
+
+.dark .token.regex,
+.dark .token.important,
+.dark .token.variable {
+  color: #FCD34D !important;
+}
+
+/* Mintlify-specific component parts */
+.dark [data-component-part] {
+  color: inherit !important;
+}
+
+.dark [data-component-part="code-block-root"] {
+  color: #E8E4F0 !important;
+}
+
+/* Ensure all spans in content area are visible */
+.dark #content-area span,
+.dark .mdx-content span {
+  color: inherit !important;
+}
+
+/* Fix for "Step X:" headers specifically */
+.dark .prose p strong:first-child,
+.dark .prose li strong:first-child {
+  color: #FFFFFF !important;
+}
+
+/* Fix for any text that might be hidden */
+.dark [style*="color:"] {
+  color: inherit !important;
+}
