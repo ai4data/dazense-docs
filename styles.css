@@ -5,8 +5,8 @@
 	--mz-purple-dark: #aa80ff;
 	--mz-text-strong: rgba(255, 255, 255, 0.96);
 	--mz-text: rgba(255, 255, 255, 0.92);
-	--mz-text-muted: rgba(255, 255, 255, 0.85);
-	--mz-link: #e1d4ff;
+	--mz-text-muted: rgba(255, 255, 255, 0.9);
+	--mz-link: #f0e8ff;
 	--mz-link-hover: #ffffff;
 }
 
@@ -49,6 +49,13 @@ body {
 	color: var(--mz-text);
 }
 
+#content-area span,
+#content-area div,
+#content-area figcaption,
+#content-area blockquote {
+	color: var(--mz-text);
+}
+
 #content-area a {
 	color: var(--mz-link);
 }
@@ -61,4 +68,52 @@ body {
 #content-area pre {
 	background: rgba(255, 255, 255, 0.05);
 	border: 1px solid rgba(255, 255, 255, 0.08);
+	color: var(--mz-text-strong);
+}
+
+#content-area code {
+	padding: 0.1em 0.3em;
+	border-radius: 6px;
+}
+
+#content-area kbd {
+	color: var(--mz-text-strong);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.08);
+}
+
+#sidebar a,
+#sidebar span,
+#sidebar div,
+#sidebar p,
+#sidebar li,
+#sidebar h2,
+#sidebar h3 {
+	color: var(--mz-text) !important;
+}
+
+#table-of-contents,
+#table-of-contents a,
+#table-of-contents span,
+#table-of-contents li,
+#table-of-contents p {
+	color: var(--mz-text-muted) !important;
+}
+
+.dark .text-gray-400,
+.dark .text-gray-500,
+.dark .text-slate-400,
+.dark .text-slate-500,
+.dark .text-zinc-400,
+.dark .text-zinc-500 {
+	color: var(--mz-text-muted) !important;
+}
+
+.dark #content-area .text-gray-400,
+.dark #content-area .text-gray-500,
+.dark #content-area .text-slate-400,
+.dark #content-area .text-slate-500,
+.dark #content-area .text-zinc-400,
+.dark #content-area .text-zinc-500 {
+	color: var(--mz-text) !important;
 }
