@@ -19,8 +19,7 @@ docker run -d \
   --name dazense \
   -p 5005:5005 \
   -e BETTER_AUTH_URL=http://localhost:5005 \
-  -e FASTAPI_URL=http://127.0.0.1:8005 \
-  dazense/dazense:latest
+  metazense/dazense:latest
 ```
 
 **Docker with Custom Project:**
@@ -29,10 +28,9 @@ docker run -d \
   --name dazense \
   -p 5005:5005 \
   -e BETTER_AUTH_URL=http://localhost:5005 \
-  -e FASTAPI_URL=http://127.0.0.1:8005 \
   -v /path/to/your/project:/app/project \
-  -e dazense_DEFAULT_PROJECT_PATH=/app/project \
-  dazense/dazense:latest
+  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/project \
+  metazense/dazense:latest
 ```
 
 Access the interface at `http://localhost:5005`.

@@ -75,8 +75,7 @@ docker run -d \
   --name dazense \
   -p 5005:5005 \
   -e BETTER_AUTH_URL=http://localhost:5005 \
-  -e FASTAPI_URL=http://127.0.0.1:8005 \
-  dazense/dazense:latest
+  metazense/dazense:latest
 ```
 
 **With your project:**
@@ -86,10 +85,9 @@ docker run -d \
   --name dazense \
   -p 5005:5005 \
   -e BETTER_AUTH_URL=http://localhost:5005 \
-  -e FASTAPI_URL=http://127.0.0.1:8005 \
   -v /path/to/your/project:/app/project \
-  -e dazense_DEFAULT_PROJECT_PATH=/app/project \
-  dazense/dazense:latest
+  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/project \
+  metazense/dazense:latest
 ```
 
 Access the UI at `http://localhost:5005` and add your LLM API key in the settings.
@@ -99,7 +97,7 @@ From there, you can start asking questions to your agent!
 ## Step 6: Evaluate your agent
 
 First, create a folder tests/ with questions and expected SQL in yaml.
-Then, mesure agent's performance on examples with dazense test command:
+Then, measure agent's performance on examples with dazense test command:
 
 ```bash
 dazense test

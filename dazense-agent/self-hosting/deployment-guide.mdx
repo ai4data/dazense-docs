@@ -16,7 +16,7 @@ dazense init
 Run a first dazense sync if you want to start populating content in your repo:
 
 ```bash
-dazense init
+dazense sync
 ```
 
 **2. In `dazense_config.yaml`, replace your secrets by environment variables**
@@ -55,10 +55,10 @@ git commit -m "Initial dazense project"
 
 ## Step 2: Create Dockerfile
 
-Create a `Dockerfile` in your repository, using the official [`dazense/dazense` image](https://hub.docker.com/r/dazense/dazense) as the base:
+Create a `Dockerfile` in your repository, using the official [`metazense/dazense` image](https://hub.docker.com/r/metazense/dazense) as the base:
 
 ```dockerfile
-FROM dazense/dazense:latest
+FROM metazense/dazense:latest
 
 # Copy your project files
 COPY . /app/project/
@@ -117,8 +117,7 @@ Container port: `5005`
 **Environment variables:**
 
 ```bash
-dazense_DEFAULT_PROJECT_PATH=/app/project
-FASTAPI_URL=http://127.0.0.1:8005
+DAZENSE_DEFAULT_PROJECT_PATH=/app/project
 BETTER_AUTH_URL=https://placeholder.run.app   # will be updated after first deploy
 ```
 
@@ -152,12 +151,12 @@ If you prefer a friendly URL instead of the default Cloud Run URL:
 
 1. In Cloud Run, go to **Domain mappings**.
 2. Verify your domain.
-3. Add the subdomain you want to use (e.g. `sky.naolabs.io`).
+3. Add the subdomain you want to use (e.g. `dazense.yourdomain.com`).
 4. Add the required DNS records at your DNS provider.
 5. Update `BETTER_AUTH_URL` to the custom domain, for example:
 
 ```bash
-BETTER_AUTH_URL=https://sky.naolabs.io
+BETTER_AUTH_URL=https://dazense.yourdomain.com
 ```
 
 ## Step 5: Customize your setup

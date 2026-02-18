@@ -72,7 +72,7 @@ Set up automated syncing with GitHub Actions to keep your context up to date.
 
 This workflow will regularly run `dazense sync` on GitHub's servers, commit any changes to your context files (like updated database schemas or docs), and push them back to your repository so your context stays in sync without manual commands.
 
-Create `.github/workflows/nao_sync.yml` in your repository:
+Create `.github/workflows/dazense_sync.yml` in your repository:
 
 ```yaml
 name: dazense Sync
@@ -89,7 +89,7 @@ jobs:
       contents: write  # needed to commit changes
 
     env:
-      dazense_DEFAULT_PROJECT_PATH: ./dazense_config.yaml
+      DAZENSE_DEFAULT_PROJECT_PATH: .
 
     steps:
       - name: Checkout repository

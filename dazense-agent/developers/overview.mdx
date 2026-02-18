@@ -11,10 +11,10 @@ dazense is an open source project, and we welcome contributions from the communi
 
 ## Get Involved
 
-- **Star the Repo** — Show your support by starring the repository at https://github.com/dazense/dazense
-- **Report Issues** — Found a bug? Open an issue and help us improve at https://github.com/dazense/dazense/issues
-- **Submit PRs** — Contribute code by submitting a pull request at https://github.com/dazense/dazense/pulls
-- **Join Discussions** — Share ideas and connect with other contributors at https://github.com/dazense/dazense/discussions
+- **Star the Repo** — Show your support by starring the repository at https://github.com/metazense/dazense
+- **Report Issues** — Found a bug? Open an issue and help us improve at https://github.com/metazense/dazense/issues
+- **Submit PRs** — Contribute code by submitting a pull request at https://github.com/metazense/dazense/pulls
+- **Join Discussions** — Share ideas and connect with other contributors at https://github.com/metazense/dazense/discussions
 
 ## Development Setup
 
@@ -22,7 +22,7 @@ To contribute to dazense, clone the repository and follow the setup instructions
 
 ```bash
 # Clone the repository
-git clone https://github.com/dazense/dazense.git
+git clone https://github.com/metazense/dazense.git
 cd dazense
 
 # Install dependencies
@@ -64,15 +64,15 @@ dazense is built with modern technologies:
 
 ```bash
 # Pull the image
-docker pull dazense/dazense:latest
+docker pull metazense/dazense:latest
 
 # Run the container
 docker run -d \
   --name dazense \
   -p 5005:5005 \
-  -e dazense_DEFAULT_PROJECT_PATH=/app/example \
+  -e DAZENSE_DEFAULT_PROJECT_PATH=/app/example \
   -e OPENAI_API_KEY=sk-... \
-  dazense/dazense:latest
+  metazense/dazense:latest
 ```
 
 Access the UI at http://localhost:5005.
