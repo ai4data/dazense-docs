@@ -18,11 +18,13 @@ The `RULES.md` file is created during project initialization and serves as the p
 
 ## Specialized Context Files
 
-Rather than cramming everything into one file, organize detailed domain knowledge into modular files in `agent/semantics/`:
+Rather than cramming everything into one file, organize detailed domain knowledge into modular files such as:
 
-* `marketing.md` — Campaign definitions, customer lifecycle metrics
-* `finance.md` — Financial metrics, revenue calculations
-* `product.md` — Product-specific context and definitions
+- `docs/marketing.md` — Campaign definitions, customer lifecycle metrics
+- `docs/finance.md` — Financial metrics, revenue calculations
+- `docs/product.md` — Product-specific context and definitions
+- `semantics/business_rules.yml` — structured governance guidance
+- `semantics/semantic_model.yml` — structured metric definitions
 
 This approach prevents token bloat by loading detailed context only when relevant to user queries.
 
@@ -64,6 +66,14 @@ The agent should ask clarifying questions about:
 * Default to 30-day windows unless specified
 * Flag queries accessing personally identifiable information
 * Never display full email addresses or phone numbers
+
+## Trusted Analytics files
+
+If you enable Trusted Analytics V1/V2, add and maintain:
+
+- `datasets/<bundle_id>/dataset.yaml` (scope and join boundaries)
+- `policies/policy.yml` (hard enforcement rules)
+- `contracts/runs/*.json` (runtime audit artifacts)
 
 ## Best Practices
 

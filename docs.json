@@ -83,6 +83,15 @@
             ]
           },
           {
+            "group": "Trusted Analytics",
+            "pages": [
+              "dazense-agent/trusted-analytics/operating-modes",
+              "dazense-agent/trusted-analytics/v1-overview",
+              "dazense-agent/trusted-analytics/v2-openmetadata",
+              "dazense-agent/trusted-analytics/validation-and-testing"
+            ]
+          },
+          {
             "group": "Context engineering",
             "pages": [
               "dazense-agent/context-engineering/principles",

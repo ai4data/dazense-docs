@@ -1,0 +1,52 @@
+---
+title: Trusted Analytics V2 (OpenMetadata)
+description: "Use OpenMetadata as the governance signal source for the V1 runtime."
+---
+
+Trusted Analytics V2 keeps the V1 enforcement runtime and upgrades where governance signals come from.
+
+## What changes from V1
+
+- **Runtime stays the same**: contracts, policy checks, scoped execution
+- **Inputs improve**: metadata and governance signals are sourced from OpenMetadata
+
+## Typical V2 signals
+
+- PII classifications
+- Dataset ownership and stewardship
+- Glossary terms and synonyms
+- Lineage for data product boundaries
+- Certification and quality status
+
+## Recommended V2 rollout
+
+### V2a (first)
+
+Feed V1 policy/provenance with OpenMetadata signals:
+
+- Auto-populate PII columns
+- Enrich contracts with owner/certification/quality context
+- Keep human review for promoted policy changes
+
+### V2b (later)
+
+Add lineage-assisted bundle generation:
+
+- Suggest bundle tables/joins from lineage
+- Require review before activation
+
+## Architectural principle
+
+OpenMetadata is a **catalog**, not the execution engine.
+The execution engine remains in dazense (policy + contract runtime).
+
+## Migration path
+
+1. Stabilize V1 in production.
+2. Introduce metadata sync jobs and snapshot review.
+3. Switch policy inputs to OpenMetadata-derived artifacts.
+4. Keep manual override paths for incident response.
+
+<Note>
+Treat V2 as an enhancement of V1, not a parallel architecture.
+</Note>

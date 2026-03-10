@@ -1,0 +1,55 @@
+---
+title: Trusted Analytics V1
+description: "Contract-first governance for safe, auditable analytics."
+---
+
+Trusted Analytics V1 adds an enforcement layer between the agent and your data.
+
+## Core idea
+
+V1 closes the trust gap with three guarantees:
+
+1. **Scope** — only approved tables and joins
+2. **Meaning** — governed metric definitions
+3. **Safety** — policy-enforced execution (PII, limits, time filters)
+
+## V1 building blocks
+
+| Layer | Purpose | Primary files |
+| --- | --- | --- |
+| Semantic model | Deterministic metrics and joins | `semantics/semantic_model.yml` |
+| Business rules | Guidance and domain constraints | `semantics/business_rules.yml` |
+| Dataset bundles | Allowed tables + join graph | `datasets/<bundle_id>/dataset.yaml` |
+| Policy | Enforceable constraints | `policies/policy.yml` |
+| Execution contracts | Per-query audit artifact | `contracts/runs/*.json` |
+
+## Runtime flow
+
+1. User asks a question.
+2. Agent calls `build_contract`.
+3. Policy engine returns `allow`, `block`, or `needs_clarification`.
+4. If allowed, execution runs with `contract_id`.
+5. Contract is persisted for provenance.
+
+## Strict vs compatibility mode
+
+`policies/policy.yml` controls runtime strictness:
+
+```yaml
+execution:
+  require_contract: false
+```
+
+- `false`: backward-compatible behavior
+- `true`: strict contract gating (recommended for production)
+
+## Why V1 matters
+
+- Consistent revenue-style metrics across LLMs
+- Deterministic PII blocking
+- Query boundary control with dataset bundles
+- Auditable artifacts for compliance and debugging
+
+<Card title="Validation and testing" icon="shield-check" href="/dazense-agent/trusted-analytics/validation-and-testing">
+Run `dazense validate`, `dazense eval`, and `dazense eval --engine`
+</Card>

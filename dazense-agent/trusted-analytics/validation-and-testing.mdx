@@ -1,0 +1,65 @@
+---
+title: Validation and Testing
+description: "Validate governance config and evaluate guardrail behavior."
+---
+
+Use these commands before promoting governance changes.
+
+## 1) Validate configuration
+
+```bash
+dazense validate
+```
+
+Checks consistency across:
+
+- dataset bundles
+- policy configuration
+- semantic model references
+
+## 2) Run governance evaluation
+
+```bash
+dazense eval
+```
+
+Runs governance test cases from bundle `eval_test_cases`.
+
+## 3) Run engine-based evaluation
+
+```bash
+dazense eval --engine
+```
+
+Runs Python-native policy checks (stronger than structural heuristics):
+
+- PII checks (including `SELECT *`)
+- table scope detection
+- time filter checks
+- business-rule matching
+
+## 4) Run scorecard only
+
+```bash
+dazense eval --scorecard
+```
+
+Shows governance completeness checks (for example `require_contract`, bundle requirements, PII declarations).
+
+## 5) Mode-based manual checks
+
+For end-to-end UX validation, test each mode:
+
+1. **none** — no governance
+2. **semantic** — semantic model + business rules
+3. **full** — policy + contracts + bundle constraints
+
+Use your mode switch script and start a new chat after each switch.
+
+## Minimum production bar
+
+- `dazense validate` passes
+- `dazense eval` passes
+- `dazense eval --engine` passes
+- PII prompts are blocked in full mode
+- Critical metrics (for example revenue) are consistent across supported LLMs

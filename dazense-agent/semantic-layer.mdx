@@ -5,6 +5,10 @@ description: "Define governed metrics and dimensions in YAML for consistent answ
 
 The semantic layer lets you define metrics, dimensions, and joins once so dazense answers consistently and transparently.
 
+<Note>
+The semantic layer governs metric meaning. It does not replace policy enforcement. For hard controls (PII, scope, contracts), use Trusted Analytics V1.
+</Note>
+
 ## Create a semantic model
 
 Create `semantics/semantic_model.yml`:
@@ -57,8 +61,30 @@ models:
 
 - `count`, `sum`, `avg`, `min`, `max`, `count_distinct`
 
+## Add deterministic filters to critical measures
+
+For business-critical metrics (for example revenue), encode exclusions directly in the measure definition:
+
+```yaml
+total_revenue:
+  column: amount
+  type: sum
+  filters:
+    - column: status
+      operator: not_in
+      value: [returned, return_pending]
+```
+
+This prevents LLM-dependent interpretation drift.
+
 ## Join types
 
 - `many_to_one`, `one_to_one`, `one_to_many`
 
 When a semantic model is present, the agent uses `query_metrics` for covered questions to avoid ad‑hoc SQL and keep logic governed.
+
+## Mode behavior
+
+- **Direct Analytics**: semantic model optional
+- **Trusted Analytics V1**: semantic model strongly recommended (often required for critical metrics)
+- **Trusted Analytics V2**: same as V1, with metadata enrichment from OpenMetadata

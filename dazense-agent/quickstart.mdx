@@ -3,6 +3,18 @@ title: Quickstart
 description: "Set up your dazense agent project in minutes with the CLI."
 ---
 
+## Step 0: Choose your operating mode
+
+Before setup, decide which user experience you want:
+
+- **Direct Analytics**: fastest, minimal guardrails
+- **Trusted Analytics V1**: contracts + policies + bundles + semantic metrics
+- **Trusted Analytics V2**: V1 runtime with OpenMetadata-fed governance signals
+
+<Card title="Compare operating modes" icon="sliders" href="/dazense-agent/trusted-analytics/operating-modes">
+Pick the right trust level for your users
+</Card>
+
 ## Step 1: Install dazense-core package
 
 ```bash
@@ -52,7 +64,15 @@ dazense sync
 
 This will populate your context folder with your context files (data, metadata, repos, etc.).
 
-## Step 5: Launch the chat and ask questions
+## Step 5 (recommended): Validate governance configuration
+
+```bash
+dazense validate
+```
+
+If you're using Trusted Analytics V1/V2, this checks bundle/policy/semantic consistency before chat usage.
+
+## Step 6: Launch the chat and ask questions
 
 You have two options to access the chat UI:
 
@@ -94,7 +114,7 @@ Access the UI at `http://localhost:5005` and add your LLM API key in the setting
 
 From there, you can start asking questions to your agent!
 
-## Step 6: Evaluate your agent
+## Step 7: Evaluate your agent
 
 First, create a folder tests/ with questions and expected SQL in yaml.
 Then, measure agent's performance on examples with dazense test command:
@@ -108,6 +128,15 @@ View results in tests panel:
 ```bash
 dazense test server
 ```
+
+If you're using Trusted Analytics V1/V2, also run:
+
+```bash
+dazense eval
+dazense eval --engine
+```
+
+These commands validate governance behavior, not only answer correctness.
 
 <Card title="Evaluation Guide" icon="flask" href="/dazense-agent/context-engineering/evaluation">
 Learn how to build comprehensive test suites and evaluate your agent

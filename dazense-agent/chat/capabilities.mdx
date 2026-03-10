@@ -9,26 +9,34 @@ description: "The dazense chat interface provides powerful built-in capabilities
 - **Data Visualization**: Automatically generate charts and graphs from your data
 - **Transparent Reasoning**: See the SQL queries and logic behind each answer
 - **Conversation History**: Navigate through past queries and build on previous answers
+- **Governance Modes**: Run with no governance, semantic guidance, or full trusted execution
 
 ## How It Works
 
-The agent processes questions through five sequential steps:
+The agent processes questions through six sequential steps:
 
 1. **Context Discovery** - Searches and reads context files to understand the data model, business definitions, and rules
-2. **Query Generation** - Writes optimized SQL queries based on the context
-3. **Execution** - Runs the query against connected databases
-4. **Visualization** - Creates charts when appropriate to display data
-5. **Response** - Summarizes findings in plain language with sources and reasoning
+2. **Execution Planning** - Chooses `query_metrics` (semantic) or SQL path
+3. **Governance Check** (Trusted V1/V2) - Builds a contract and runs policy checks
+4. **Execution** - Runs approved SQL/metrics with scope and policy constraints
+5. **Visualization** - Creates charts when appropriate to display data
+6. **Response** - Summarizes findings in plain language with sources and reasoning
 
 ## Agent Tools
 
-The dazense agent includes six autonomous tools:
+The dazense agent includes tools for both analytics and governance:
 
-- **execute_sql** - Executes SQL queries against connected databases, supporting multiple connections and returning structured results
-- **display_chart** - Creates visualizations (bar, line, and pie charts) from query results with customizable styling
-- **search** - Searches for files matching glob patterns within project context
-- **list** - Lists files and directories at specified paths to help navigate project structure
-- **read** - Reads context files including SQL models, documentation, and business definitions
-- **grep** - Searches text patterns across context files using regex with filtering options
+- **build_contract** - Creates and validates an execution contract before governed runs
+- **query_metrics** - Executes semantic-model metrics for deterministic answers
+- **execute_sql** - Executes SQL queries against connected databases
+- **get_business_context** - Retrieves applicable business-rule guidance
+- **display_chart** - Creates visualizations from query outputs
+- **search / list / read / grep** - Context retrieval and file navigation
 
 The agent automatically orchestrates these tools based on your question without requiring manual tool specification.
+
+## What changes by mode
+
+- **Direct Analytics**: fast SQL-focused experience
+- **Semantic Mode**: governed metrics and business guidance, lighter enforcement
+- **Trusted V1/V2**: contract-first execution, policy checks, and provenance artifacts

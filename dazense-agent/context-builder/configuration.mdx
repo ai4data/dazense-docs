@@ -87,6 +87,10 @@ my-analytics-agent/
 │   └── tools/              # Custom tools
 ├── databases/              # Database schemas (populated after sync)
 ├── docs/                   # Documentation files
+├── semantics/              # semantic_model.yml and business_rules.yml
+├── datasets/               # Dataset bundles for trusted modes
+├── policies/               # Enforcement policy for trusted modes
+├── contracts/              # Runtime contract logs (generated)
 └── queries/                # Example queries
 ```
 
@@ -223,6 +227,22 @@ databases:
 Use `credentials_json` for cloud deployments (Cloud Run, GitHub Actions, etc.) where you store the full JSON content in an environment variable or secret manager. Use `credentials_path` for local development with credential files.
 
 When using `credentials_json`, the environment variable must contain the **entire JSON content** of your service account key file, not just the path.
+
+## Trusted Analytics toggle points
+
+When enabling Trusted Analytics V1/V2, configure:
+
+- `datasets/<bundle_id>/dataset.yaml`
+- `policies/policy.yml`
+- `semantics/semantic_model.yml`
+- `semantics/business_rules.yml`
+
+For strict runtime gating:
+
+```yaml
+execution:
+  require_contract: true
+```
 
 **Next Steps**
 

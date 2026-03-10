@@ -1,0 +1,38 @@
+---
+title: Operating Modes
+description: "Choose the right trust and governance level for your users."
+---
+
+dazense supports three user experiences:
+
+1. **Direct Analytics** — fastest path, minimal controls
+2. **Trusted Analytics V1** — policy + contract + semantic governance
+3. **Trusted Analytics V2** — V1 runtime with OpenMetadata-fed governance inputs
+
+## Mode comparison
+
+| Mode | What users get | Guardrails | Best for |
+| --- | --- | --- | --- |
+| **Direct Analytics** | Natural-language SQL analytics | Minimal (LLM-guided only) | Prototyping, internal technical teams |
+| **Trusted Analytics V1** | Contracted analytics with provenance | Dataset bundles, policy checks, PII block, time filters, audited contracts | Production analytics where trust matters |
+| **Trusted Analytics V2** | V1 + enterprise metadata intelligence | Same V1 enforcement + OpenMetadata signals (PII, lineage, glossary, ownership, quality) | Enterprise-scale governed analytics |
+
+## How this maps to your project files
+
+| File | Direct Analytics | Trusted Analytics V1 | Trusted Analytics V2 |
+| --- | --- | --- | --- |
+| `semantics/semantic_model.yml` | Optional | Required for governed metrics | Required |
+| `semantics/business_rules.yml` | Optional | Recommended | Required |
+| `datasets/<bundle_id>/dataset.yaml` | Not used | Required | Generated/synced from metadata + reviewed |
+| `policies/policy.yml` | Not used | Required | Auto-populated/synced + reviewed |
+| `contracts/runs/*.json` | Usually absent | Generated per governed run | Generated per governed run |
+
+## Recommended rollout
+
+1. Start with **Direct Analytics** for onboarding speed.
+2. Move to **Trusted Analytics V1** for production trust and auditability.
+3. Add **Trusted Analytics V2** when OpenMetadata is available and stable.
+
+<Note>
+V2 does not replace V1. V2 keeps the same enforcement runtime and upgrades the governance signal source.
+</Note>

@@ -5,6 +5,10 @@ description: "Encode governance rules so answers follow your business logic."
 
 Business rules are guardrails that prevent incorrect metrics (for example, excluding cancelled orders from revenue).
 
+<Note>
+`business_rules.yml` is guidance. Hard runtime enforcement lives in `policies/policy.yml` and execution contracts.
+</Note>
+
 ## Define rules
 
 Create `semantics/business_rules.yml`:
@@ -26,9 +30,22 @@ rules:
     guidance: Filter out customer_id > 100 for production analysis
 ```
 
+## Rule fields that matter most
+
+- `severity`: `critical`, `warning`, `info`
+- `applies_to`: metric/model targets such as `orders.total_revenue`
+- `guidance`: explicit instruction the agent should reference
+
 ## Best practices
 
 - Keep critical rules short and unambiguous.
 - Attach rules to specific metrics where possible.
 - Use `warning` for data quality caveats and `info` for guidance.
 - Keep additional narrative context in `RULES.md`.
+- Keep one canonical definition per metric across all files.
+
+## Enforcement boundary
+
+- **Semantic model** (`semantic_model.yml`): deterministic metric computation
+- **Business rules** (`business_rules.yml`): explanation and interpretation guidance
+- **Policy** (`policy.yml`): enforceable controls (PII, scope, execution rules)
